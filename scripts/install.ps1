@@ -1332,6 +1332,54 @@ except Exception:
             throw "Baseline imports failed in $InstallDir\venv (dotenv/openai/rich/prompt_toolkit). The install completed but dependencies are not in the venv. $hint"
         }
         Write-Success "Baseline imports verified in venv"
+
+        # Verify hermes_cli itself is importable.  On Windows, `uv pip install -e .`
+        # can complete with exit 0 while leaving the editable-install `.pth` file
+        # out of site-packages (antivirus file-lock, NTFS filter drivers, or uv
+        # using a different editable mechanism on newer versions).  The result:
+        # hermes.exe exists in venv\Scripts\ but fails immediately with
+        # `ModuleNotFoundError: No module named 'hermes_cli'`.
+        # Third-party packages pass the check above because they are wheel-installed
+        # directly into site-packages; only our own editable install depends on
+        # the `.pth` file.
+        $prevEAP = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
+        & $venvPython -c "import hermes_cli" 2>&1 | Out-Null
+        $hermesCliImportOk = ($LASTEXITCODE -eq 0)
+        $ErrorActionPreference = $prevEAP
+        if (-not $hermesCliImportOk) {
+            Write-Warn "hermes_cli is not importable -- applying Windows editable-install fix..."
+            # The editable install should have written a .pth file in site-packages
+            # pointing at $InstallDir so Python can find the hermes_cli package.
+            # When it's missing we recreate it manually.
+            $prevEAP = $ErrorActionPreference
+            $ErrorActionPreference = "Continue"
+            $sitePackagesRaw = & $venvPython -c "import site; print(site.getsitepackages()[0])" 2>$null
+            $siteGetOk = ($LASTEXITCODE -eq 0)
+            $ErrorActionPreference = $prevEAP
+            if ($siteGetOk -and $sitePackagesRaw) {
+                $sitePackages = $sitePackagesRaw.Trim()
+                $pthFile = Join-Path $sitePackages "hermes-agent-editable.pth"
+                # Write without BOM (PS 5.1's Set-Content -Encoding UTF8 adds a
+                # BOM that Python's .pth reader silently mishandles on some builds).
+                $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+                [System.IO.File]::WriteAllText($pthFile, ($InstallDir + [System.Environment]::NewLine), $utf8NoBom)
+                Write-Info "Created editable .pth: $pthFile -> $InstallDir"
+                # Verify the fix took effect.
+                $prevEAP = $ErrorActionPreference
+                $ErrorActionPreference = "Continue"
+                & $venvPython -c "import hermes_cli" 2>&1 | Out-Null
+                $fixOk = ($LASTEXITCODE -eq 0)
+                $ErrorActionPreference = $prevEAP
+                if ($fixOk) {
+                    Write-Success "hermes_cli importable after editable-install fix"
+                } else {
+                    throw "hermes_cli still not importable after editable-install fix. Manual recovery: Set-Content -Path '$pthFile' -Value '$InstallDir' -NoNewline; then restart your terminal."
+                }
+            } else {
+                throw "hermes_cli not importable and site-packages path could not be determined. Manual recovery: find venv\Lib\site-packages\ and create a .pth file containing '$InstallDir'"
+            }
+        }
     }
 
     # Verify the dashboard deps specifically -- they're the most common thing
