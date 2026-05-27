@@ -1454,7 +1454,31 @@ function Set-PathVariable {
     
     # Update current session
     $env:Path = "$hermesBin;$env:Path"
-    
+
+    # Belt-and-suspenders: add $InstallDir to PYTHONPATH so hermes_cli is
+    # importable even when the editable-install .pth file is absent.
+    # This happens when:
+    #   - antivirus / NTFS filter drivers block uv writing the .pth file
+    #   - the user runs `git pull` without re-running `uv pip install -e .`
+    #   - uv changes its editable-install mechanism in a future release
+    # PYTHONPATH is read by Python at startup before site.py processes .pth
+    # files, so it is the most reliable way to ensure the package is found.
+    # We prepend rather than replace so any existing PYTHONPATH entries are
+    # preserved.
+    if (-not $NoVenv) {
+        $currentPP = [Environment]::GetEnvironmentVariable("PYTHONPATH", "User")
+        $ppItems = if ($currentPP) { $currentPP -split ";" | Where-Object { $_ -ne "" } } else { @() }
+        if ($ppItems -notcontains $InstallDir) {
+            $newPP = ((@($InstallDir) + $ppItems) -join ";")
+            [Environment]::SetEnvironmentVariable("PYTHONPATH", $newPP, "User")
+            $env:PYTHONPATH = $newPP
+            Write-Success "Set PYTHONPATH to include $InstallDir"
+        } else {
+            # Keep session env in sync even if registry was already correct.
+            $env:PYTHONPATH = ($ppItems -join ";")
+        }
+    }
+
     Write-Success "hermes command ready"
 }
 
