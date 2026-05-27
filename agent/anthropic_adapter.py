@@ -8,6 +8,7 @@ Auth supports:
   - Regular API keys (sk-ant-api*) → x-api-key header
   - OAuth setup-tokens (sk-ant-oat*) → Bearer auth + beta header
   - Claude Code credentials (~/.claude.json or ~/.claude/.credentials.json) → Bearer auth
+  - CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR → token read from open file descriptor
 """
 
 import copy
@@ -1111,12 +1112,43 @@ def _prefer_refreshable_claude_code_token(env_token: str, creds: Optional[Dict[s
     return None
 
 
+def _read_oauth_token_from_fd() -> Optional[str]:
+    """Read the Claude Code OAuth token from CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR.
+
+    Claude Code passes the OAuth token to child processes via an open file
+    descriptor (e.g. fd 4) rather than as a plain env var, to avoid token
+    exposure in /proc/<pid>/environ.  The fd number is stored in
+    CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR.
+
+    Returns the token string, or None if the env var is absent or the read fails.
+    """
+    fd_str = os.getenv("CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR", "").strip()
+    if not fd_str:
+        return None
+    try:
+        fd = int(fd_str)
+    except ValueError:
+        logger.debug("CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR is not an integer: %r", fd_str)
+        return None
+    try:
+        # Read up to 4 KiB — tokens are never that long, but leave room for whitespace
+        raw = os.read(fd, 4096)
+        token = raw.decode("utf-8", errors="replace").strip()
+        if token:
+            logger.debug("Read OAuth token from file descriptor %d", fd)
+            return token
+    except OSError as exc:
+        logger.debug("Could not read OAuth token from fd %d: %s", fd, exc)
+    return None
+
+
 def resolve_anthropic_token() -> Optional[str]:
     """Resolve an Anthropic token from all available sources.
 
     Priority:
       1. ANTHROPIC_TOKEN env var (OAuth/setup token saved by Hermes)
       2. CLAUDE_CODE_OAUTH_TOKEN env var
+      2a. CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR (token passed via open fd)
       3. Claude Code credentials (~/.claude.json or ~/.claude/.credentials.json)
          — with automatic refresh if expired and a refresh token is available
       4. ANTHROPIC_API_KEY env var (regular API key, or legacy fallback)
@@ -1140,6 +1172,14 @@ def resolve_anthropic_token() -> Optional[str]:
         if preferred:
             return preferred
         return cc_token
+
+    # 2a. CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR — token delivered via open fd
+    fd_token = _read_oauth_token_from_fd()
+    if fd_token:
+        preferred = _prefer_refreshable_claude_code_token(fd_token, creds)
+        if preferred:
+            return preferred
+        return fd_token
 
     # 3. Claude Code credential file
     resolved_claude_token = _resolve_claude_code_token_from_credentials(creds)

@@ -1475,6 +1475,7 @@ def _normalize_pool_priorities(provider: str, entries: List[PooledCredential]) -
     source_rank = {
         "env:ANTHROPIC_TOKEN": 0,
         "env:CLAUDE_CODE_OAUTH_TOKEN": 1,
+        "fd:CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR": 1,
         "hermes_pkce": 2,
         "claude_code": 3,
         "env:ANTHROPIC_API_KEY": 4,
@@ -1895,6 +1896,31 @@ def _seed_from_env(provider: str, entries: List[PooledCredential]) -> Tuple[bool
                 auth_type=auth_type,
             ),
         )
+
+    # Inject Claude Code OAuth token delivered via file descriptor (Claude Code session)
+    if provider == "anthropic" and not _get_env_prefer_dotenv("CLAUDE_CODE_OAUTH_TOKEN"):
+        fd_source = "fd:CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR"
+        if not _is_source_suppressed(provider, fd_source):
+            try:
+                from agent.anthropic_adapter import _read_oauth_token_from_fd
+                fd_token = _read_oauth_token_from_fd()
+            except Exception:
+                fd_token = None
+            if fd_token:
+                active_sources.add(fd_source)
+                changed |= _upsert_entry(
+                    entries,
+                    provider,
+                    fd_source,
+                    _env_payload(
+                        source=fd_source,
+                        env_var="CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR",
+                        token=fd_token,
+                        base_url=env_url or pconfig.inference_base_url,
+                        auth_type=AUTH_TYPE_OAUTH,
+                    ),
+                )
+
     return changed, active_sources
 
 
