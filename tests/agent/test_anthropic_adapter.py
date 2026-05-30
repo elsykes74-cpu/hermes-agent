@@ -12,6 +12,7 @@ from agent.prompt_caching import apply_anthropic_cache_control
 from agent.anthropic_adapter import (
     _is_azure_anthropic_endpoint,
     _is_oauth_token,
+    _read_oauth_token_from_fd,
     _refresh_oauth_token,
     _to_plain_data,
     _write_claude_code_credentials,
@@ -348,6 +349,49 @@ class TestResolveAnthropicToken:
         monkeypatch.setattr("agent.anthropic_adapter.Path.home", lambda: tmp_path)
 
         assert resolve_anthropic_token() == "sk-ant-oat01-static-token"
+
+
+class TestReadOauthTokenFromFd:
+    def test_returns_none_when_env_var_absent(self, monkeypatch):
+        monkeypatch.delenv("CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR", raising=False)
+        assert _read_oauth_token_from_fd() is None
+
+    def test_returns_none_for_invalid_fd_number(self, monkeypatch):
+        monkeypatch.setenv("CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR", "not-a-number")
+        assert _read_oauth_token_from_fd() is None
+
+    def test_reads_token_from_pipe(self, monkeypatch):
+        import os
+        r, w = os.pipe()
+        token = "cc-test-oauth-token-12345"
+        os.write(w, token.encode())
+        os.close(w)
+        monkeypatch.setenv("CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR", str(r))
+        result = _read_oauth_token_from_fd()
+        os.close(r)
+        assert result == token
+
+    def test_returns_none_for_closed_fd(self, monkeypatch):
+        import os
+        r, w = os.pipe()
+        os.close(r)
+        os.close(w)
+        monkeypatch.setenv("CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR", str(r))
+        assert _read_oauth_token_from_fd() is None
+
+    def test_resolve_anthropic_token_falls_back_to_fd(self, monkeypatch, tmp_path):
+        import os
+        monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+        monkeypatch.delenv("ANTHROPIC_TOKEN", raising=False)
+        monkeypatch.delenv("CLAUDE_CODE_OAUTH_TOKEN", raising=False)
+        monkeypatch.setattr("agent.anthropic_adapter.Path.home", lambda: tmp_path)
+        r, w = os.pipe()
+        os.write(w, b"cc-fd-token-xyz")
+        os.close(w)
+        monkeypatch.setenv("CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR", str(r))
+        result = resolve_anthropic_token()
+        os.close(r)
+        assert result == "cc-fd-token-xyz"
 
 
 class TestRefreshOauthToken:

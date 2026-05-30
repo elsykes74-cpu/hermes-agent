@@ -1328,11 +1328,13 @@ def _anthropic_oauth_status() -> Dict[str, Any]:
         from agent.anthropic_adapter import (
             read_hermes_oauth_credentials,
             read_claude_code_credentials,
+            _read_oauth_token_from_fd,
             _HERMES_OAUTH_FILE,
         )
     except ImportError:
         read_claude_code_credentials = None  # type: ignore
         read_hermes_oauth_credentials = None  # type: ignore
+        _read_oauth_token_from_fd = None  # type: ignore
         _HERMES_OAUTH_FILE = None  # type: ignore
 
     hermes_creds = None
@@ -1368,11 +1370,25 @@ def _anthropic_oauth_status() -> Dict[str, Any]:
         }
 
     env_token = os.getenv("ANTHROPIC_TOKEN") or os.getenv("CLAUDE_CODE_OAUTH_TOKEN")
+    if not env_token and _read_oauth_token_from_fd:
+        try:
+            env_token = _read_oauth_token_from_fd()
+        except Exception:
+            env_token = None
     if env_token:
+        fd_active = bool(
+            not os.getenv("ANTHROPIC_TOKEN")
+            and not os.getenv("CLAUDE_CODE_OAUTH_TOKEN")
+            and os.getenv("CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR")
+        )
         return {
             "logged_in": True,
             "source": "env_var",
-            "source_label": "ANTHROPIC_TOKEN environment variable",
+            "source_label": (
+                "CLAUDE_CODE_OAUTH_TOKEN_FILE_DESCRIPTOR (Claude Code session)"
+                if fd_active
+                else "ANTHROPIC_TOKEN environment variable"
+            ),
             "token_preview": _truncate_token(env_token),
             "expires_at": None,
             "has_refresh_token": False,
