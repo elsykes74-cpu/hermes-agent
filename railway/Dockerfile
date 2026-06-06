@@ -71,7 +71,6 @@ RUN mkdir -p /etc/cont-init.d && \
     chmod +x /etc/cont-init.d/01-hermes-setup
 COPY --chmod=0755 docker/cont-init.d/015-supervise-perms /etc/cont-init.d/015-supervise-perms
 COPY --chmod=0755 docker/cont-init.d/02-reconcile-profiles /etc/cont-init.d/02-reconcile-profiles
-COPY --chmod=0755 railway/cont-init.d/012-railway-env /etc/cont-init.d/012-railway-env
 
 # Seed QuickKick personality and config (overrides defaults)
 COPY railway/SOUL.md /opt/hermes/docker/SOUL.md
@@ -89,6 +88,7 @@ USER root
 RUN chmod -R a+rX /opt/hermes && \
     chown -R hermes:hermes /opt/hermes/.venv /opt/hermes/node_modules
 
-ENTRYPOINT [ "/init", "/opt/hermes/docker/main-wrapper.sh" ]
-# Start gateway in foreground — picks up TELEGRAM_BOT_TOKEN from env
+# Railway-specific entrypoint: writes env vars to .env BEFORE s6-overlay starts
+COPY --chmod=0755 railway/railway-entrypoint.sh /railway-entrypoint.sh
+ENTRYPOINT [ "/railway-entrypoint.sh" ]
 CMD [ "gateway", "run" ]
