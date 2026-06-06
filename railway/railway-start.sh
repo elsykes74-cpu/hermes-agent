@@ -16,6 +16,7 @@ mkdir -p \
     "$HERMES_HOME/workspace" \
     "$HERMES_HOME/home"
 
+chown -R hermes:hermes "$HERMES_HOME" 2>/dev/null || true
 printf 'docker\n' > "$HERMES_HOME/.install_method"
 
 # Seed config and SOUL on first boot
