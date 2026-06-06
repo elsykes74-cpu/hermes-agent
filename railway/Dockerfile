@@ -82,7 +82,6 @@ ENV PATH="/opt/hermes/.venv/bin:/opt/data/.local/bin:${PATH}"
 ENV GATEWAY_ALLOW_ALL_USERS=true
 
 RUN mkdir -p /opt/data
-VOLUME [ "/opt/data" ]
 
 # Permissions
 USER root
