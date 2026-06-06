@@ -75,6 +75,10 @@ COPY --chmod=0755 docker/cont-init.d/02-reconcile-profiles /etc/cont-init.d/02-r
 # Seed QuickKick personality and config (overrides defaults)
 COPY railway/SOUL.md /opt/hermes/docker/SOUL.md
 COPY railway/config.yaml /opt/hermes/cli-config.yaml.example
+# Use an empty .env.example so stage2-hook seeds a blank .env.
+# load_hermes_dotenv uses override=True, so a non-empty .env.example
+# would wipe Railway env vars with empty defaults. Empty = no overrides.
+RUN printf '' > /opt/hermes/.env.example
 
 ENV HERMES_WEB_DIST=/opt/hermes/hermes_cli/web_dist
 ENV HERMES_HOME=/opt/data
@@ -88,7 +92,5 @@ USER root
 RUN chmod -R a+rX /opt/hermes && \
     chown -R hermes:hermes /opt/hermes/.venv /opt/hermes/node_modules
 
-# Railway-specific entrypoint: writes env vars to .env BEFORE s6-overlay starts
-COPY --chmod=0755 railway/railway-entrypoint.sh /railway-entrypoint.sh
-ENTRYPOINT [ "/railway-entrypoint.sh" ]
+ENTRYPOINT [ "/init", "/opt/hermes/docker/main-wrapper.sh" ]
 CMD [ "gateway", "run" ]
