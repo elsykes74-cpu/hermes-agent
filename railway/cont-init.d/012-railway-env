@@ -1,0 +1,31 @@
+#!/bin/sh
+# Translate Railway environment variables into Hermes's .env file.
+# Runs after 01-hermes-setup seeds the baseline .env from .env.example,
+# so Railway secrets always override/supplement the seeded defaults.
+set -eu
+
+HERMES_HOME="${HERMES_HOME:-/opt/data}"
+ENV_FILE="$HERMES_HOME/.env"
+
+[ -f "$ENV_FILE" ] || touch "$ENV_FILE"
+
+write_var() {
+    key="$1"
+    val="$2"
+    if grep -q "^${key}=" "$ENV_FILE" 2>/dev/null; then
+        sed -i "s|^${key}=.*|${key}=${val}|" "$ENV_FILE"
+    else
+        printf '%s=%s\n' "$key" "$val" >> "$ENV_FILE"
+    fi
+}
+
+[ -n "${TELEGRAM_BOT_TOKEN:-}"       ] && write_var "TELEGRAM_BOT_TOKEN"       "$TELEGRAM_BOT_TOKEN"
+[ -n "${ANTHROPIC_API_KEY:-}"        ] && write_var "ANTHROPIC_API_KEY"        "$ANTHROPIC_API_KEY"
+[ -n "${TELEGRAM_HOME_CHANNEL:-}"    ] && write_var "TELEGRAM_HOME_CHANNEL"    "$TELEGRAM_HOME_CHANNEL"
+[ -n "${GATEWAY_ALLOW_ALL_USERS:-}"  ] && write_var "GATEWAY_ALLOW_ALL_USERS"  "$GATEWAY_ALLOW_ALL_USERS"
+[ -n "${PLAYWRIGHT_BROWSERS_PATH:-}" ] && write_var "PLAYWRIGHT_BROWSERS_PATH" "$PLAYWRIGHT_BROWSERS_PATH"
+
+chown hermes:hermes "$ENV_FILE" 2>/dev/null || true
+chmod 600 "$ENV_FILE" 2>/dev/null || true
+
+echo "[012-railway-env] Env vars written to $ENV_FILE"
