@@ -92,5 +92,7 @@ USER root
 RUN chmod -R a+rX /opt/hermes && \
     chown -R hermes:hermes /opt/hermes/.venv /opt/hermes/node_modules
 
-ENTRYPOINT [ "/init", "/opt/hermes/docker/main-wrapper.sh" ]
-CMD [ "gateway", "run" ]
+# Direct startup script — bypasses s6-overlay so Railway env vars are
+# visible to Python's os.environ without being filtered or overridden.
+COPY --chmod=0755 railway/railway-start.sh /railway-start.sh
+ENTRYPOINT [ "/railway-start.sh" ]
