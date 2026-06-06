@@ -27,5 +27,9 @@ chown hermes:hermes "$HERMES_HOME/.env" 2>/dev/null || true
 chmod 600 "$HERMES_HOME/.env"
 
 echo "[railway-entrypoint] Wrote $HERMES_HOME/.env"
+echo "[railway-entrypoint] GATEWAY_ALLOW_ALL_USERS=${GATEWAY_ALLOW_ALL_USERS:-NOT_SET}"
+echo "[railway-entrypoint] TELEGRAM_BOT_TOKEN set: $(test -n "${TELEGRAM_BOT_TOKEN:-}" && echo YES || echo NO)"
+echo "[railway-entrypoint] .env contents (keys only):"
+grep -o '^[A-Z_]*' "$HERMES_HOME/.env" || true
 
 exec /init /opt/hermes/docker/main-wrapper.sh "$@"
