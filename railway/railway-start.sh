@@ -43,6 +43,7 @@ BROWSER_SESSION_TIMEOUT=300
 WEB_TOOLS_DEBUG=false
 VISION_TOOLS_DEBUG=false
 ENVEOF
+chown hermes:hermes "$HERMES_HOME/.env" 2>/dev/null || true
 chmod 600 "$HERMES_HOME/.env"
 
 echo "[railway-start] Starting QuickKick gateway"
