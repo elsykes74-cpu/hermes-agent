@@ -52,4 +52,11 @@ echo "[railway-start] TELEGRAM token set: $(test -n "${TELEGRAM_BOT_TOKEN:-}" &&
 . /opt/hermes/.venv/bin/activate
 cd /opt/data
 
-exec /usr/bin/s6-setuidgid hermes hermes gateway run
+# s6-overlay installs to /command/; fall back to su if not available
+if [ -x /command/s6-setuidgid ]; then
+    exec /command/s6-setuidgid hermes hermes gateway run
+elif [ -x /usr/bin/s6-setuidgid ]; then
+    exec /usr/bin/s6-setuidgid hermes hermes gateway run
+else
+    exec su -s /bin/sh hermes -c "exec hermes gateway run"
+fi
