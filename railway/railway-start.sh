@@ -50,6 +50,10 @@ chmod 600 "$HERMES_HOME/.env"
 echo "[railway-start] Starting QuickKick gateway"
 echo "[railway-start] TELEGRAM token set: $(test -n "${TELEGRAM_BOT_TOKEN:-}" && echo YES || echo NO)"
 
+# Set HOME so Python's Path.home() resolves to /opt/data (hermes's home),
+# not /root — gateway lock files and state dirs land in the right place.
+export HOME=/opt/data
+
 # Activate venv and drop to hermes user
 . /opt/hermes/.venv/bin/activate
 cd /opt/data
