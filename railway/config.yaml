@@ -5,6 +5,9 @@ fallback_providers: []
 credential_pool_strategies: {}
 toolsets:
 - hermes-cli
+platforms:
+  telegram:
+    enabled: true
 agent:
   max_turns: 40
   gateway_timeout: 0
