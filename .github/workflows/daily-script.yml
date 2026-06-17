@@ -22,8 +22,9 @@ jobs:
         run: pip install requests
 
       - name: Generate script and send to Telegram
-        run: python elvis-daily-script/generate_script.py
+        working-directory: elvis-daily-script
+        run: python generate_script.py
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

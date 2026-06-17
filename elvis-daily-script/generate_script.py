@@ -1,95 +1,71 @@
-import json
 import os
+import json
 import random
-import datetime
 import requests
+from datetime import datetime
 
+OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
+TELEGRAM_BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
+TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 
-def load_topics():
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    topics_path = os.path.join(script_dir, "topics", "topics.json")
-    with open(topics_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+with open("topics/topics.json", "r", encoding="utf-8") as f:
+    topics = json.load(f)
 
+random.seed(datetime.now().strftime("%Y-%m-%d"))
+topic = random.choice(topics)
 
-def pick_topic(topics):
-    seed = datetime.date.today().toordinal()
-    rng = random.Random(seed)
-    return rng.choice(topics)
+print(f"Today's topic: {topic}")
 
+system_prompt = """You are the head writer for The King Lives — a faceless Elvis Presley documentary YouTube channel. Write a single 60-second narration script about the assigned topic.
 
-def generate_script(topic, api_key):
-    system_prompt = (
-        "You are the head writer for The King Lives — a faceless Elvis Presley documentary YouTube channel. "
-        "Write a single 60-second narration script about the assigned topic.\n\n"
-        "STRICT RULES:\n"
-        "- 130 to 150 words exactly\n"
-        "- No blank lines between sentences — one continuous flowing block of text\n"
-        "- No stage directions, scene notes, labels, or headers\n"
-        "- No markdown formatting of any kind\n"
-        "- Historically accurate — do not invent facts\n"
-        "- Open with a date, place, or shocking statement — never Elvis's name first\n"
-        "- Cinematic documentary tone — David Attenborough meets true crime\n"
-        "- End on an emotional gut-punch closing line\n"
-        "- Output the raw script text and absolutely nothing else"
-    )
+STRICT RULES:
+- 130 to 150 words exactly
+- No blank lines between sentences — one continuous flowing block of text
+- No stage directions, scene notes, labels, or headers
+- No markdown formatting of any kind
+- Historically accurate — do not invent facts
+- Open with a date, place, or shocking statement — never Elvis's name first
+- Cinematic documentary tone — David Attenborough meets true crime
+- End on an emotional gut-punch closing line
+- Output the raw script text and absolutely nothing else"""
 
-    headers = {
-        "x-api-key": api_key,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
-    }
+user_prompt = f"Today's topic: {topic}"
 
-    payload = {
-        "model": "claude-sonnet-4-6",
+response = requests.post(
+    "https://openrouter.ai/api/v1/chat/completions",
+    headers={
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://github.com/elsykes74-cpu/elvis-daily-script",
+        "X-Title": "The King Lives — Elvis Daily Script",
+    },
+    json={
+        "model": "anthropic/claude-sonnet-4-6",
         "max_tokens": 1000,
-        "system": system_prompt,
-        "messages": [{"role": "user", "content": f"Today's topic: {topic}"}],
-    }
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+    },
+    timeout=60,
+)
 
-    response = requests.post(
-        "https://api.anthropic.com/v1/messages",
-        headers=headers,
-        json=payload,
-        timeout=60,
-    )
-    response.raise_for_status()
-    return response.json()["content"][0]["text"].strip()
+response.raise_for_status()
+script = response.json()["choices"][0]["message"]["content"].strip()
 
+print(f"Script generated ({len(script.split())} words)")
+print(f"\n--- SCRIPT PREVIEW ---\n{script[:200]}...\n")
 
-def send_telegram(bot_token, chat_id, script_text):
-    message = f"We are going to do an Elvis Presley video.\n\nScript: {script_text}"
+message = f"We are going to do an Elvis Presley video.\n\nScript: {script}"
 
-    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-    payload = {"chat_id": chat_id, "text": message}
+telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
 
-    response = requests.post(url, json=payload, timeout=30)
-    response.raise_for_status()
-    return response.json()
+telegram_response = requests.post(
+    telegram_url,
+    json={"chat_id": TELEGRAM_CHAT_ID, "text": message},
+    timeout=30,
+)
 
-
-def main():
-    api_key = os.environ["ANTHROPIC_API_KEY"]
-    bot_token = os.environ["TELEGRAM_BOT_TOKEN"]
-    chat_id = os.environ["TELEGRAM_CHAT_ID"]
-
-    topics = load_topics()
-    topic = pick_topic(topics)
-    print(f"Topic: {topic}")
-
-    script = generate_script(topic, api_key)
-    word_count = len(script.split())
-    print(f"Script generated ({word_count} words)")
-    print("---")
-    print(script)
-    print("---")
-
-    result = send_telegram(bot_token, chat_id, script)
-    if result.get("ok"):
-        print("Telegram message delivered successfully.")
-    else:
-        raise RuntimeError(f"Telegram delivery failed: {result}")
-
-
-if __name__ == "__main__":
-    main()
+telegram_response.raise_for_status()
+print("Sent to Quickkick successfully")
+print(f"Message ID: {telegram_response.json()['result']['message_id']}")
