@@ -8,7 +8,7 @@ import requests
 def load_topics():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     topics_path = os.path.join(script_dir, "topics", "topics.json")
-    with open(topics_path, "r") as f:
+    with open(topics_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
