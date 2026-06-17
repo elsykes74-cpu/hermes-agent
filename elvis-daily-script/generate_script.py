@@ -5,8 +5,8 @@ import requests
 from datetime import datetime
 
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
-TELEGRAM_BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
-TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
+LADYJAYE_BOT_TOKEN = os.environ["LADYJAYE_BOT_TOKEN"]
+QUICKKICK_CHAT_ID = os.environ["QUICKKICK_CHAT_ID"]
 
 with open("topics/topics.json", "r", encoding="utf-8") as f:
     topics = json.load(f)
@@ -53,19 +53,20 @@ response = requests.post(
 response.raise_for_status()
 script = response.json()["choices"][0]["message"]["content"].strip()
 
-print(f"Script generated ({len(script.split())} words)")
-print(f"\n--- SCRIPT PREVIEW ---\n{script[:200]}...\n")
+word_count = len(script.split())
+print(f"Script generated ({word_count} words)")
+print(f"\n--- SCRIPT PREVIEW ---\n{script[:150]}...\n")
 
 message = f"We are going to do an Elvis Presley video.\n\nScript: {script}"
 
-telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+telegram_url = f"https://api.telegram.org/bot{LADYJAYE_BOT_TOKEN}/sendMessage"
 
 telegram_response = requests.post(
     telegram_url,
-    json={"chat_id": TELEGRAM_CHAT_ID, "text": message},
+    json={"chat_id": QUICKKICK_CHAT_ID, "text": message},
     timeout=30,
 )
 
 telegram_response.raise_for_status()
-print("Sent to Quickkick successfully")
+print("LadyJayeBot delivered script to QuickKick successfully")
 print(f"Message ID: {telegram_response.json()['result']['message_id']}")

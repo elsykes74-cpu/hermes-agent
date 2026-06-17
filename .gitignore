@@ -75,3 +75,6 @@ models-dev-upstream/
 hermes_cli/tui_dist/*
 hermes_cli/scripts/
 docs/superpowers/*
+
+# Elvis Daily Script — local helper only, not needed in CI
+elvis-daily-script/get_chat_id.py

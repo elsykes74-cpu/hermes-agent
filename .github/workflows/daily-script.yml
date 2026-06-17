@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Generate script and send to Telegram
+      - name: Generate script and send to QuickKick via LadyJayeBot
         working-directory: elvis-daily-script
         run: python generate_script.py
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          LADYJAYE_BOT_TOKEN: ${{ secrets.LADYJAYE_BOT_TOKEN }}
+          QUICKKICK_CHAT_ID: ${{ secrets.QUICKKICK_CHAT_ID }}
