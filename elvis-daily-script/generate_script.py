@@ -6,7 +6,7 @@ from datetime import datetime
 
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
 LADYJAYE_BOT_TOKEN = os.environ["LADYJAYE_BOT_TOKEN"]
-QUICKKICK_CHAT_ID = os.environ["QUICKKICK_CHAT_ID"]
+QUICKKICK_CHAT_ID = os.environ["QUICKKICK_CHAT_ID"].strip()
 
 with open("topics/topics.json", "r", encoding="utf-8") as f:
     topics = json.load(f)
@@ -67,6 +67,9 @@ telegram_response = requests.post(
     timeout=30,
 )
 
+print(f"Telegram status: {telegram_response.status_code}")
+if not telegram_response.ok:
+    print(f"Telegram error body: {telegram_response.text}")
 telegram_response.raise_for_status()
 print("LadyJayeBot delivered script to QuickKick successfully")
 print(f"Message ID: {telegram_response.json()['result']['message_id']}")
