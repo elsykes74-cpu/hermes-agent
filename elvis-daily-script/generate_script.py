@@ -57,7 +57,7 @@ word_count = len(script.split())
 print(f"Script generated ({word_count} words)")
 print(f"\n--- SCRIPT PREVIEW ---\n{script[:150]}...\n")
 
-message = f"We are going to do an Elvis Presley video.\n\nSCRIPT:\n\n@quickkickbot {script}"
+message = f"/agents\n\nSCRIPT:\n\n{script}"
 
 telegram_url = f"https://api.telegram.org/bot{LADYJAYE_BOT_TOKEN}/sendMessage"
 
