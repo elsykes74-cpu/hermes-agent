@@ -37,7 +37,7 @@ response = requests.post(
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
         "Content-Type": "application/json",
         "HTTP-Referer": "https://github.com/elsykes74-cpu/elvis-daily-script",
-        "X-Title": "The King Lives — Elvis Daily Script",
+        "X-Title": "The King Lives - Elvis Daily Script",
     },
     json={
         "model": "anthropic/claude-sonnet-4-6",
