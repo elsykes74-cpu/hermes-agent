@@ -5,8 +5,8 @@ import requests
 from datetime import datetime
 
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
-LADYJAYE_BOT_TOKEN = os.environ["LADYJAYE_BOT_TOKEN"]
-QUICKKICK_CHAT_ID = os.environ["QUICKKICK_CHAT_ID"].strip()
+QUICKKICK_API_URL = os.environ["QUICKKICK_API_URL"].rstrip("/")
+QUICKKICK_API_KEY = os.environ["QUICKKICK_API_KEY"]
 
 with open("topics/topics.json", "r", encoding="utf-8") as f:
     topics = json.load(f)
@@ -59,17 +59,23 @@ print(f"\n--- SCRIPT PREVIEW ---\n{script[:150]}...\n")
 
 message = f"We are going to do an Elvis Presley video.\n\nSCRIPT:\n\n{script}"
 
-telegram_url = f"https://api.telegram.org/bot{LADYJAYE_BOT_TOKEN}/sendMessage"
-
-telegram_response = requests.post(
-    telegram_url,
-    json={"chat_id": QUICKKICK_CHAT_ID, "text": message},
-    timeout=30,
+quickkick_response = requests.post(
+    f"{QUICKKICK_API_URL}/v1/chat/completions",
+    headers={
+        "Authorization": f"Bearer {QUICKKICK_API_KEY}",
+        "Content-Type": "application/json",
+    },
+    json={
+        "model": "hermes-agent",
+        "messages": [
+            {"role": "user", "content": message},
+        ],
+    },
+    timeout=120,
 )
 
-print(f"Telegram status: {telegram_response.status_code}")
-if not telegram_response.ok:
-    print(f"Telegram error body: {telegram_response.text}")
-telegram_response.raise_for_status()
-print("LadyJayeBot delivered script to QuickKick successfully")
-print(f"Message ID: {telegram_response.json()['result']['message_id']}")
+print(f"QuickKick status: {quickkick_response.status_code}")
+if not quickkick_response.ok:
+    print(f"QuickKick error body: {quickkick_response.text}")
+quickkick_response.raise_for_status()
+print("Script delivered to QuickKick successfully")

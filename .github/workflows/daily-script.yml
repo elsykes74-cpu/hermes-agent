@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Generate script and send to QuickKick via LadyJayeBot
+      - name: Generate script and deliver to QuickKick
         working-directory: elvis-daily-script
         run: python generate_script.py
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          LADYJAYE_BOT_TOKEN: ${{ secrets.LADYJAYE_BOT_TOKEN }}
-          QUICKKICK_CHAT_ID: ${{ secrets.QUICKKICK_CHAT_ID }}
+          QUICKKICK_API_URL: ${{ secrets.QUICKKICK_API_URL }}
+          QUICKKICK_API_KEY: ${{ secrets.QUICKKICK_API_KEY }}
