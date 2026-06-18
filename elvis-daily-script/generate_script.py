@@ -154,12 +154,15 @@ print(f"Uploaded to GCS: gs://elvis-scripts-output/{file_name}")
 # ── 5. QuickKick delivery ─────────────────────────────────────────────────────
 
 quickkick_response = requests.post(
-    f"{QUICKKICK_API_URL}/generate",
+    f"{QUICKKICK_API_URL}/v1/chat/completions",
     headers={
         "Authorization": f"Bearer {QUICKKICK_API_KEY}",
         "Content-Type": "application/json",
     },
-    json={"topic": topic, "script": script},
+    json={
+        "model": "hermes-agent",
+        "messages": [{"role": "user", "content": f"We are going to do an Elvis Presley video.\n\nSCRIPT:\n\n{script}"}],
+    },
     timeout=120,
 )
 
