@@ -148,18 +148,18 @@ creds = service_account.Credentials.from_service_account_info(
 )
 drive = build("drive", "v3", credentials=creds)
 
-results = drive.files().list(
-    q="name='Elvis Scripts' and mimeType='application/vnd.google-apps.folder' and trashed=false",
-    fields="files(id, name)",
-    includeItemsFromAllDrives=True,
-    supportsAllDrives=True,
+results = drive.drives().list(
+    q="name='Elvis Scripts'",
+    fields="drives(id, name)",
+    pageSize=10,
 ).execute()
-folders = results.get("files", [])
-if not folders:
+shared_drives = results.get("drives", [])
+if not shared_drives:
     raise RuntimeError(
-        "'Elvis Scripts' folder not found. Share it with the service account email and retry."
+        "'Elvis Scripts' shared drive not found. Create a Shared Drive with that name, "
+        "add the service account as Content Manager, then retry."
     )
-folder_id = folders[0]["id"]
+folder_id = shared_drives[0]["id"]
 
 file_name = today.strftime("%Y-%m-%d") + "_Elvis_Production.txt"
 drive_file = drive.files().create(
