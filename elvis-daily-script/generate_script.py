@@ -1,12 +1,10 @@
-import io
 import os
 import json
 import random
 import requests
 from datetime import datetime
+from google.cloud import storage
 from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaIoBaseUpload
 
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
 QUICKKICK_API_URL = os.environ["QUICKKICK_API_URL"].rstrip("/")
@@ -140,39 +138,18 @@ production_doc = "\n".join([
     "",
 ])
 
-# ── 4. Google Drive upload ────────────────────────────────────────────────────
+# ── 4. GCS upload ────────────────────────────────────────────────────────────
 
 creds = service_account.Credentials.from_service_account_info(
     json.loads(GOOGLE_CREDENTIALS_JSON),
-    scopes=["https://www.googleapis.com/auth/drive"],
+    scopes=["https://www.googleapis.com/auth/cloud-platform"],
 )
-drive = build("drive", "v3", credentials=creds)
-
-results = drive.drives().list(
-    q="name='Elvis Scripts'",
-    fields="drives(id, name)",
-    pageSize=10,
-).execute()
-shared_drives = results.get("drives", [])
-if not shared_drives:
-    raise RuntimeError(
-        "'Elvis Scripts' shared drive not found. Create a Shared Drive with that name, "
-        "add the service account as Content Manager, then retry."
-    )
-folder_id = shared_drives[0]["id"]
-
+gcs = storage.Client(credentials=creds, project="elvis-production")
 file_name = today.strftime("%Y-%m-%d") + "_Elvis_Production.txt"
-drive_file = drive.files().create(
-    body={"name": file_name, "parents": [folder_id], "mimeType": "text/plain"},
-    media_body=MediaIoBaseUpload(
-        io.BytesIO(production_doc.encode("utf-8")),
-        mimetype="text/plain",
-    ),
-    fields="id, name",
-    supportsAllDrives=True,
-).execute()
+blob = gcs.bucket("elvis-scripts-output").blob(file_name)
+blob.upload_from_string(production_doc.encode("utf-8"), content_type="text/plain")
 
-print(f"Uploaded to Drive: {drive_file['name']} (ID: {drive_file['id']})")
+print(f"Uploaded to GCS: gs://elvis-scripts-output/{file_name}")
 
 # ── 5. QuickKick delivery ─────────────────────────────────────────────────────
 
@@ -200,5 +177,5 @@ print("Script delivered to QuickKick successfully")
 print("\n--- SUMMARY ---")
 print(f"Topic     : {topic}")
 print(f"Word count: {word_count}")
-print(f"Drive file: {file_name}")
+print(f"GCS file  : gs://elvis-scripts-output/{file_name}")
 print(f"QuickKick : delivered")

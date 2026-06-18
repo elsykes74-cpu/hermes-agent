@@ -19,7 +19,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests google-auth google-auth-httplib2 google-api-python-client
+        run: pip install requests google-cloud-storage
 
       - name: Generate script and deliver to QuickKick
         working-directory: elvis-daily-script
