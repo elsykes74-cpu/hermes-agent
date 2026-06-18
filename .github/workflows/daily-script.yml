@@ -19,7 +19,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests google-auth google-auth-httplib2 google-api-python-client
 
       - name: Generate script and deliver to QuickKick
         working-directory: elvis-daily-script
@@ -28,3 +28,4 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           QUICKKICK_API_URL: ${{ secrets.QUICKKICK_API_URL }}
           QUICKKICK_API_KEY: ${{ secrets.QUICKKICK_API_KEY }}
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
