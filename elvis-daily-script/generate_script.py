@@ -159,7 +159,7 @@ quickkick_response = requests.post(
         "Authorization": f"Bearer {QUICKKICK_API_KEY}",
         "Content-Type": "application/json",
     },
-    json={"script": script},
+    json={"topic": topic, "script": script},
     timeout=120,
 )
 
