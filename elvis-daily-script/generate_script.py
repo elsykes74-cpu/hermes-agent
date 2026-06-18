@@ -1,15 +1,17 @@
+import io
 import os
 import json
 import random
 import requests
 from datetime import datetime
-from google.cloud import storage
-from google.oauth2 import service_account
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaIoBaseUpload
 
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
-QUICKKICK_API_URL = os.environ["QUICKKICK_API_URL"].rstrip("/")
-QUICKKICK_API_KEY = os.environ["QUICKKICK_API_KEY"]
-GOOGLE_CREDENTIALS_JSON = os.environ["GOOGLE_CREDENTIALS_JSON"]
+GOOGLE_CLIENT_ID = os.environ["GOOGLE_CLIENT_ID"]
+GOOGLE_CLIENT_SECRET = os.environ["GOOGLE_CLIENT_SECRET"]
+GOOGLE_REFRESH_TOKEN = os.environ["GOOGLE_REFRESH_TOKEN"]
 
 with open("topics/topics.json", "r", encoding="utf-8") as f:
     topics = json.load(f)
@@ -138,42 +140,39 @@ production_doc = "\n".join([
     "",
 ])
 
-# ── 4. GCS upload ────────────────────────────────────────────────────────────
+# ── 4. Google Drive upload (OAuth — personal account) ─────────────────────────
 
-creds = service_account.Credentials.from_service_account_info(
-    json.loads(GOOGLE_CREDENTIALS_JSON),
-    scopes=["https://www.googleapis.com/auth/cloud-platform"],
+creds = Credentials(
+    token=None,
+    refresh_token=GOOGLE_REFRESH_TOKEN,
+    token_uri="https://oauth2.googleapis.com/token",
+    client_id=GOOGLE_CLIENT_ID,
+    client_secret=GOOGLE_CLIENT_SECRET,
 )
-gcs = storage.Client(credentials=creds, project="elvis-production")
+drive = build("drive", "v3", credentials=creds)
+
+results = drive.files().list(
+    q="name='Elvis Scripts' and mimeType='application/vnd.google-apps.folder' and trashed=false",
+    fields="files(id, name)",
+).execute()
+folders = results.get("files", [])
+if not folders:
+    raise RuntimeError("'Elvis Scripts' folder not found in Google Drive.")
+folder_id = folders[0]["id"]
+
 file_name = today.strftime("%Y-%m-%d") + "_Elvis_Production.txt"
-blob = gcs.bucket("elvis-scripts-output").blob(file_name)
-blob.upload_from_string(production_doc.encode("utf-8"), content_type="text/plain")
+drive.files().create(
+    body={"name": file_name, "parents": [folder_id], "mimeType": "text/plain"},
+    media_body=MediaIoBaseUpload(
+        io.BytesIO(production_doc.encode("utf-8")),
+        mimetype="text/plain",
+    ),
+    fields="id, name",
+).execute()
 
-print(f"Uploaded to GCS: gs://elvis-scripts-output/{file_name}")
-
-# ── 5. QuickKick delivery ─────────────────────────────────────────────────────
-
-quickkick_response = requests.post(
-    f"{QUICKKICK_API_URL}/v1/chat/completions",
-    headers={
-        "Authorization": f"Bearer {QUICKKICK_API_KEY}",
-        "Content-Type": "application/json",
-    },
-    json={
-        "model": "hermes-agent",
-        "messages": [{"role": "user", "content": f"We are going to do an Elvis Presley video.\n\nSCRIPT:\n\n{script}"}],
-    },
-    timeout=120,
-)
-
-print(f"QuickKick status: {quickkick_response.status_code}")
-if not quickkick_response.ok:
-    print(f"QuickKick error body: {quickkick_response.text}")
-quickkick_response.raise_for_status()
-print("Script delivered to QuickKick successfully")
+print(f"Uploaded to Drive: Elvis Scripts/{file_name}")
 
 print("\n--- SUMMARY ---")
 print(f"Topic     : {topic}")
 print(f"Word count: {word_count}")
-print(f"GCS file  : gs://elvis-scripts-output/{file_name}")
-print(f"QuickKick : delivered")
+print(f"Drive file: {file_name}")
