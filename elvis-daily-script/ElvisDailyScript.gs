@@ -132,3 +132,7 @@ function runDaily() {
   folder.createFile(fileName, doc, MimeType.PLAIN_TEXT);
   Logger.log('Saved to Drive: Elvis Scripts/' + fileName);
 }
+
+function myFunction() {
+  runDaily();
+}
