@@ -33,7 +33,7 @@ import re
 import subprocess
 import sys
 import tempfile
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -84,7 +84,7 @@ VIDEO_HEIGHT = 1920
 
 def pick_topic() -> tuple[str, str]:
     """Return (date_str, topic) seeded by today's date."""
-    today = datetime.utcnow()
+    today = datetime.now(timezone.utc)
     date_str = today.strftime("%Y-%m-%d")
     seed = sum(ord(c) for c in date_str)
     topics = json.loads(TOPICS_FILE.read_text())
@@ -264,7 +264,7 @@ def generate_scene_image(visual_direction: str, output_path: Path, scene_num: in
 def assemble_video(scenes: list[dict], image_paths: list[Path],
                    audio_path: Path, output_path: Path) -> Path:
     """Stitch scene images + voiceover into a 9:16 MP4 using FFmpeg."""
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt",
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", encoding="utf-8",
                                      delete=False, dir=OUT_DIR) as f:
         concat_file = Path(f.name)
         for i, (scene, img) in enumerate(zip(scenes, image_paths)):
@@ -311,7 +311,7 @@ def upload_to_youtube(video_path: Path, topic: str, script: str,
         "#ElvisPresley #TheKingLives #ElvisDocumentary #Elvis #Documentary"
     )
 
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt",
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", encoding="utf-8",
                                      delete=False, dir=OUT_DIR) as f:
         desc_file = Path(f.name)
         f.write(description)
