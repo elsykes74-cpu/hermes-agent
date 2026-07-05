@@ -1,0 +1,8 @@
+# Hermes Agent — OpenRouter config (OpenAI models via OpenRouter)
+# When home: cp openrouter-config.yaml ~/.hermes/config.yaml
+# Requires OPENROUTER_API_KEY in your .env (already set for Elvis script)
+
+model:
+  provider: "openrouter"
+  default: "openai/gpt-4o"
+  base_url: "https://openrouter.ai/api/v1"

@@ -19,12 +19,13 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests google-auth google-auth-httplib2 google-api-python-client
 
-      - name: Generate script and send to QuickKick via LadyJayeBot
+      - name: Generate script and save to Drive
         working-directory: elvis-daily-script
         run: python generate_script.py
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          LADYJAYE_BOT_TOKEN: ${{ secrets.LADYJAYE_BOT_TOKEN }}
-          QUICKKICK_CHAT_ID: ${{ secrets.QUICKKICK_CHAT_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}

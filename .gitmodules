@@ -1,0 +1,3 @@
+[submodule "elvis-daily-script/video-toolkit"]
+	path = elvis-daily-script/video-toolkit
+	url = https://github.com/digitalsamba/claude-code-video-toolkit.git
