@@ -140,17 +140,24 @@ def _apply_mcp_preset(
     command: Optional[str],
     cmd_args: List[str],
     server_config: Dict[str, Any],
-) -> tuple[Optional[str], Optional[str], List[str], bool]:
-    """Apply a known MCP preset when transport details were omitted."""
+) -> tuple[Optional[str], Optional[str], List[str], Optional[str], bool]:
+    """Apply a known MCP preset when transport details were omitted.
+
+    Returns (url, command, cmd_args, preset_auth, applied).  ``preset_auth``
+    is the auth mode declared by the preset (e.g. ``"oauth"``), or ``None``.
+    The caller is responsible for deciding whether to use it — it is NOT
+    written to ``server_config`` here so that an explicit ``--auth`` flag on
+    the command line always wins without leaving a stale value behind.
+    """
     if not preset_name:
-        return url, command, cmd_args, False
+        return url, command, cmd_args, None, False
 
     preset = _MCP_PRESETS.get(preset_name)
     if not preset:
         raise ValueError(f"Unknown MCP preset: {preset_name}")
 
     if url or command:
-        return url, command, cmd_args, False
+        return url, command, cmd_args, None, False
 
     url = preset.get("url")
     command = preset.get("command")
@@ -162,10 +169,8 @@ def _apply_mcp_preset(
         server_config["command"] = command
     if cmd_args:
         server_config["args"] = cmd_args
-    if preset.get("auth"):
-        server_config["auth"] = preset["auth"]
 
-    return url, command, cmd_args, True
+    return url, command, cmd_args, preset.get("auth"), True
 
 
 # ─── Discovery (temporary connect) ───────────────────────────────────────────
@@ -245,7 +250,7 @@ def cmd_mcp_add(args):
     server_config: Dict[str, Any] = {}
     try:
         explicit_env = _parse_env_assignments(raw_env)
-        url, command, cmd_args, _preset_applied = _apply_mcp_preset(
+        url, command, cmd_args, preset_auth, _preset_applied = _apply_mcp_preset(
             name,
             preset_name=preset_name,
             url=url,
@@ -253,10 +258,11 @@ def cmd_mcp_add(args):
             cmd_args=list(cmd_args),
             server_config=server_config,
         )
-        # Preset may have set auth in server_config; pick it up if not
-        # explicitly provided on the command line.
+        # Use the preset's auth only when the user did not pass --auth
+        # explicitly. This keeps the explicit flag authoritative and avoids
+        # leaving a stale auth value in server_config when the user overrides.
         if not auth_type:
-            auth_type = server_config.get("auth")
+            auth_type = preset_auth
     except ValueError as exc:
         _error(str(exc))
         return
