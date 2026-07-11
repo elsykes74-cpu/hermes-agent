@@ -162,6 +162,8 @@ def _apply_mcp_preset(
         server_config["command"] = command
     if cmd_args:
         server_config["args"] = cmd_args
+    if preset.get("auth"):
+        server_config["auth"] = preset["auth"]
 
     return url, command, cmd_args, True
 
@@ -251,6 +253,10 @@ def cmd_mcp_add(args):
             cmd_args=list(cmd_args),
             server_config=server_config,
         )
+        # Preset may have set auth in server_config; pick it up if not
+        # explicitly provided on the command line.
+        if not auth_type:
+            auth_type = server_config.get("auth")
     except ValueError as exc:
         _error(str(exc))
         return
