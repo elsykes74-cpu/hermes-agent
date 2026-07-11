@@ -91,10 +91,14 @@ Use HTTP servers when:
 
 ### OAuth-authenticated HTTP servers
 
-Most hosted MCP servers (Linear, Sentry, Atlassian, Asana, Figma, Stripe, …) require OAuth 2.1 instead of a static bearer token. Set `auth: oauth` and Hermes handles discovery, dynamic client registration, PKCE, token exchange, refresh, and step-up auth via the MCP Python SDK.
+Most hosted MCP servers (LinkedIn, Linear, Sentry, Atlassian, Asana, Figma, Stripe, …) require OAuth 2.1 instead of a static bearer token. Set `auth: oauth` and Hermes handles discovery, dynamic client registration, PKCE, token exchange, refresh, and step-up auth via the MCP Python SDK.
 
 ```yaml
 mcp_servers:
+  linkedin:
+    url: "https://api.linkedin.com/rest/mcp"
+    auth: oauth
+
   linear:
     url: "https://mcp.linear.app/mcp"
     auth: oauth
@@ -156,13 +160,17 @@ For well-known MCP servers, `hermes mcp add` accepts a `--preset` flag that fill
 | Preset | What it wires up |
 |---|---|
 | `codex` | The Codex CLI's MCP server (`codex mcp-server` over stdio). Requires the `codex` CLI on PATH. |
+| `linkedin` | LinkedIn's official MCP server (`https://api.linkedin.com/rest/mcp`) with OAuth 2.1. Requires a [LinkedIn Developer App](https://www.linkedin.com/developers/apps). |
 
 ```bash
 # Add Codex CLI as an MCP server in one line
 hermes mcp add codex --preset codex
+
+# Add LinkedIn's MCP server (opens OAuth browser flow on first use)
+hermes mcp add linkedin --preset linkedin
 ```
 
-That writes the equivalent of:
+The codex preset writes the equivalent of:
 
 ```yaml
 mcp_servers:
@@ -171,7 +179,16 @@ mcp_servers:
     args: ["mcp-server"]
 ```
 
-You can pick any local name (`hermes mcp add my-codex --preset codex` is fine); the preset only provides the `command`/`args` defaults.
+The linkedin preset writes the equivalent of:
+
+```yaml
+mcp_servers:
+  linkedin:
+    url: "https://api.linkedin.com/rest/mcp"
+    auth: oauth
+```
+
+You can pick any local name (`hermes mcp add my-codex --preset codex` is fine); the preset only provides the `command`/`args`/`url`/`auth` defaults.
 
 ## How Hermes registers MCP tools
 
