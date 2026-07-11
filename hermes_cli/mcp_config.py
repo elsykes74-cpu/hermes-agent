@@ -37,6 +37,10 @@ _MCP_PRESETS: Dict[str, Dict[str, Any]] = {
         "command": "codex",
         "args": ["mcp-server"],
     },
+    "linkedin": {
+        "url": "https://api.linkedin.com/rest/mcp",
+        "auth": "oauth",
+    },
 }
 
 
