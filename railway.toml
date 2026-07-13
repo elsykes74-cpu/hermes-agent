@@ -1,0 +1,7 @@
+[build]
+dockerfilePath = "railway/Dockerfile"
+buildCommand = ""
+
+[deploy]
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
