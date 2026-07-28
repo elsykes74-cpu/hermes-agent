@@ -15,7 +15,7 @@ Automotive industry leader and AI practitioner with 15+ years of dealership, cli
 Cox Automotive / Manheim Mobile Inspections · Dec 2025 – Present
 
 - Conduct mobile vehicle condition assessments and produce disclosure reports relied on by dealers and auction buyers for high-stakes wholesale purchasing decisions
-- Maintain one of the lowest arbitration rates on the team — a direct measure of accuracy, credibility, and accountability with dealer customers
+- Maintain a 2–3% arbitration rate — well below industry average, and a direct measure of accuracy, credibility, and accountability with dealer customers
 - Build trusted relationships with dealer principals through consistent, transparent reporting and rapid response when disputes arise
 
 **Vehicle Inspector**
@@ -115,6 +115,6 @@ Directed automotive sales operations for 8 years; specialized in structuring fin
 - *✅ LinkedIn URL — filled*
 - *✅ 6-person team at Bertera CJDR — filled*
 - *✅ 4-person team at Branford Hall — filled*
-- *Arbitration rate — do you have a number or a ranking (e.g., top 5% of inspectors)?*
+- *✅ Arbitration rate — filled (2–3%)*
 - *✅ ACV territory — filled (Western MA, Berkshires, Hartford CT)*
 - *✅ Real estate volume — filled ($1M+ annually)*
