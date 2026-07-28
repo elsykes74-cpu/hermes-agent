@@ -1,5 +1,5 @@
 # ERICK SYKES
-413-348-3257 · elsykes74@gmail.com · Western Massachusetts · [LinkedIn URL]
+413-348-3257 · elsykes74@gmail.com · linkedin.com/in/erick-sykes-4747a19 · Western Massachusetts
 
 ---
 
@@ -28,7 +28,7 @@ ACV Auctions · Aug 2023 – Dec 2025
 **Real Estate Client Success & Technology Coordinator** *(concurrent, part-time 2019–2021; primary focus 2021–2023)*
 NextHome Elite Realty / BKaye Realty · Jan 2019 – Present
 
-- Million-dollar producer in total sales volume across two brokerages; guided clients through complex, high-stakes purchasing decisions in a trust-dependent, relationship-driven environment
+- Consistent $1M+ annual sales volume across two brokerages; guided clients through complex, high-stakes purchasing decisions in a trust-dependent, relationship-driven environment
 - Coordinated cross-functional processes (legal, finance, inspection, compliance) to drive transactions to close with minimal friction
 - Applied consultative sales methodology developed over 15 years in automotive to a new domain with consistent results
 
@@ -111,9 +111,9 @@ Directed automotive sales operations for 8 years; specialized in structuring fin
 ---
 
 *Placeholders to fill in before sending:*
-- *[LinkedIn URL] — add your LinkedIn profile URL to the header*
+- *✅ LinkedIn URL — filled*
 - *✅ 6-person team at Bertera CJDR — filled*
 - *✅ 4-person team at Branford Hall — filled*
 - *Arbitration rate — do you have a number or a ranking (e.g., top 5% of inspectors)?*
 - *✅ ACV territory — filled (Western MA, Berkshires, Hartford CT)*
-- *Real estate volume — annual figure, or total over the period?*
+- *✅ Real estate volume — filled ($1M+ annually)*
