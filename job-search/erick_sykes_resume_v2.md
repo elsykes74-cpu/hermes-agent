@@ -35,14 +35,14 @@ NextHome Elite Realty / BKaye Realty · Jan 2019 – Present
 **Sales Manager & Enablement Lead**
 Bertera CJDR · Jan 2018 – Jan 2021
 
-- Managed a [X]-person dealership sales team; owned hiring, onboarding, ongoing coaching, and performance accountability
+- Managed a 6-person dealership sales team; owned hiring, onboarding, ongoing coaching, and performance accountability
 - Drove CRM adoption across the sales floor — identifying resistance, developing training programs, and tracking utilization metrics — resulting in improved pipeline visibility and cross-functional execution
 - Partnered with marketing and operations leadership to align process, data, and performance expectations; oversaw KPI dashboards and month-end reporting
 
 **Assistant Director of Admissions**
 Branford Hall · Springfield, MA · May 2013 – Jul 2015
 
-- Promoted from Admissions Advisor to Assistant Director; led a team of [X] advisors to meet enrollment targets through structured accountability systems and active development
+- Promoted from Admissions Advisor to Assistant Director; led a team of 4 advisors to meet enrollment targets through structured accountability systems and active development
 - Recruited, onboarded, and coached team members; delivered corrective feedback and formal performance management in a high-stakes, metrics-driven environment
 
 **Admissions Counselor**
@@ -112,8 +112,8 @@ Directed automotive sales operations for 8 years; specialized in structuring fin
 
 *Placeholders to fill in before sending:*
 - *[LinkedIn URL] — add your LinkedIn profile URL to the header*
-- *[X]-person team at Bertera CJDR — how many direct reports?*
-- *[X]-person team at Branford Hall — how many advisors did you lead?*
+- *✅ 6-person team at Bertera CJDR — filled*
+- *✅ 4-person team at Branford Hall — filled*
 - *Arbitration rate — do you have a number or a ranking (e.g., top 5% of inspectors)?*
 - *ACV territory — county or state coverage worth noting?*
 - *Real estate volume — annual figure, or total over the period?*
