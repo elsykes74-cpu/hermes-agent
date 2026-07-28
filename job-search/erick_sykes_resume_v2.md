@@ -36,6 +36,7 @@ NextHome Elite Realty / BKaye Realty · Jan 2019 – Present
 Bertera CJDR · Jan 2018 – Jan 2021
 
 - Managed a 6-person dealership sales team; owned hiring, onboarding, ongoing coaching, and performance accountability
+- Drove team to a 30–40% lead-to-appointment conversion rate, 20%+ connect rate, and 50–70% appointment-to-show rate across internet and phone leads
 - Drove CRM adoption across the sales floor — identifying resistance, developing training programs, and tracking utilization metrics — resulting in improved pipeline visibility and cross-functional execution
 - Partnered with marketing and operations leadership to align process, data, and performance expectations; oversaw KPI dashboards and month-end reporting
 
