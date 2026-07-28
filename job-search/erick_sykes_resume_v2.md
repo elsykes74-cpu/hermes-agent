@@ -21,7 +21,7 @@ Cox Automotive / Manheim Mobile Inspections · Dec 2025 – Present
 **Vehicle Inspector**
 ACV Auctions · Aug 2023 – Dec 2025
 
-- Performed detailed mobile vehicle assessments via the Inspectify platform across a [X-county / X-state] territory; recognized as the team's subject matter expert on engine noise and mechanical condition
+- Performed detailed mobile vehicle assessments via the Inspectify platform across Western Massachusetts, the Berkshires, and the Hartford CT corridor; recognized as the team's subject matter expert on engine noise and mechanical condition
 - Consistently achieved monthly bonus targets while maintaining inspection integrity under volume pressure
 - Mentored a newly onboarded inspector through field training covering inspection standards, disclosure requirements, and platform workflows
 
@@ -115,5 +115,5 @@ Directed automotive sales operations for 8 years; specialized in structuring fin
 - *✅ 6-person team at Bertera CJDR — filled*
 - *✅ 4-person team at Branford Hall — filled*
 - *Arbitration rate — do you have a number or a ranking (e.g., top 5% of inspectors)?*
-- *ACV territory — county or state coverage worth noting?*
+- *✅ ACV territory — filled (Western MA, Berkshires, Hartford CT)*
 - *Real estate volume — annual figure, or total over the period?*
