@@ -6,8 +6,8 @@ Steps:
   1. Pick today's topic (date-seeded, same logic as Apps Script)
   2. Generate narration script via OpenRouter (130-150 words)
   3. Generate 7-scene breakdown
-  4. Generate voiceover MP3 via ElevenLabs
-  5. Generate 7 scene images via Ideogram 4
+  4. Generate voiceover MP3 via Qwen3-TTS on RunPod
+  5. Generate 7 scene images via FLUX.2 on RunPod
   6. Assemble 9:16 MP4 with FFmpeg
   7. Upload to YouTube (private by default)
 
@@ -16,12 +16,13 @@ Usage:
   python elvis_pipeline.py --publish          # go public immediately
   python elvis_pipeline.py --dry-run          # stop before video gen + upload
   python elvis_pipeline.py --auth-youtube     # one-time YouTube OAuth login
+  python elvis_pipeline.py --setup-runpod     # one-time RunPod endpoint setup
 
 Required env vars (copy .env.example to .env and fill in):
   OPENROUTER_API_KEY
-  ELEVENLABS_API_KEY
-  ELEVENLABS_VOICE_ID
-  IDEOGRAM_API_KEY
+  RUNPOD_API_KEY
+  RUNPOD_FLUX2_ENDPOINT_ID       (auto-set by --setup-runpod)
+  RUNPOD_QWEN3TTS_ENDPOINT_ID    (auto-set by --setup-runpod)
   YOUTUBE_CLIENT_SECRETS_FILE
 """
 from __future__ import annotations
@@ -53,9 +54,7 @@ sys.path.insert(0, str(TOOLKIT_TOOLS))
 # ── Config ────────────────────────────────────────────────────────────────────
 
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY", "")
-ELEVENLABS_VOICE_ID = os.environ.get("ELEVENLABS_VOICE_ID", "")
-IDEOGRAM_API_KEY = os.environ.get("IDEOGRAM_API_KEY", "")
+RUNPOD_API_KEY = os.environ.get("RUNPOD_API_KEY", "")
 YOUTUBE_CLIENT_SECRETS = os.environ.get("YOUTUBE_CLIENT_SECRETS_FILE", "")
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -67,17 +66,14 @@ OPENROUTER_HEADERS = {
     "X-Title": "The King Lives - Elvis Daily Script",
 }
 
-# ElevenLabs settings from production notes
-ELEVENLABS_SETTINGS = {
-    "stability": 0.70,
-    "similarity_boost": 0.65,
-    "style": 0.0,
-    "use_speaker_boost": True,
-    "speed": 0.88,
-}
-
 VIDEO_WIDTH = 1080
 VIDEO_HEIGHT = 1920
+
+# Documentary narration style for Qwen3-TTS
+NARRATOR_INSTRUCT = (
+    "Speak with gravitas and reverence, slow cinematic documentary pace, "
+    "measured and resonant, like a true crime narrator"
+)
 
 
 # ── Step 1: Topic selection ───────────────────────────────────────────────────
@@ -146,7 +142,7 @@ def generate_scene_breakdown(script: str) -> str:
                         "STRICT RULES:\n"
                         "- Exactly 7 scenes\n"
                         "- Timestamps start at 00:00 and end at 01:00 exactly\n"
-                        "- Visual direction is one concrete sentence for Ideogram image generation\n"
+                        "- Visual direction is one concrete sentence for FLUX.2 image generation\n"
                         "- Style: black and white vintage documentary photography, cinematic\n"
                         "- Do not invent content — only use words from the script\n"
                         "- Output ONLY this exact format:\n\n"
@@ -168,10 +164,10 @@ def generate_scene_breakdown(script: str) -> str:
 # ── Scene parser ──────────────────────────────────────────────────────────────
 
 def parse_scenes(breakdown: str) -> list[dict]:
-    """Parse scene breakdown into list of {start, end, duration, visual_direction}."""
+    """Parse scene breakdown into list of {start, end, duration, narration, visual_direction}."""
     scenes = []
     pattern = re.compile(
-        r"Scene \d+ \| (\d{2}:\d{2}) - (\d{2}:\d{2})\n.*?\nVisual direction: (.+)",
+        r"Scene \d+ \| (\d{2}:\d{2}) - (\d{2}:\d{2})\n(.*?)\nVisual direction: (.+)",
         re.DOTALL,
     )
     for m in pattern.finditer(breakdown):
@@ -181,7 +177,8 @@ def parse_scenes(breakdown: str) -> list[dict]:
             "start": start,
             "end": end,
             "duration": end - start,
-            "visual_direction": m.group(3).strip(),
+            "narration": m.group(3).strip(),
+            "visual_direction": m.group(4).strip(),
         })
     return scenes
 
@@ -191,70 +188,66 @@ def _ts_to_sec(ts: str) -> float:
     return int(parts[0]) * 60 + int(parts[1])
 
 
-# ── Step 4: Voiceover ─────────────────────────────────────────────────────────
+# ── Step 4: Voiceover via Qwen3-TTS on RunPod ────────────────────────────────
 
-def generate_voiceover(script: str, output_path: Path) -> Path:
-    """Call ElevenLabs API directly with production settings."""
-    if not ELEVENLABS_API_KEY:
-        raise RuntimeError("ELEVENLABS_API_KEY not set")
-    if not ELEVENLABS_VOICE_ID:
-        raise RuntimeError("ELEVENLABS_VOICE_ID not set")
+def generate_voiceover(script: str, run_dir: Path) -> Path:
+    """Generate full voiceover using Qwen3-TTS via RunPod.
 
-    url = f"https://api.elevenlabs.io/v1/text-to-speech/{ELEVENLABS_VOICE_ID}"
-    headers = {
-        "xi-api-key": ELEVENLABS_API_KEY,
-        "Content-Type": "application/json",
-    }
-    payload = {
-        "text": script,
-        "model_id": "eleven_multilingual_v2",
-        "voice_settings": ELEVENLABS_SETTINGS,
-    }
-    resp = requests.post(url, headers=headers, json=payload, timeout=120)
-    resp.raise_for_status()
-    output_path.write_bytes(resp.content)
-    print(f"  Voiceover: {output_path} ({len(resp.content) // 1024}KB)")
-    return output_path
+    Writes scene text files to a scenes/ subfolder (the common folder),
+    calls voiceover.py to generate per-scene MP3s, then concatenates them.
+    """
+    scenes_dir = run_dir / "scenes"
+    scenes_dir.mkdir(exist_ok=True)
+
+    # Write the full script as a single scene file
+    script_txt = scenes_dir / "scene_01.txt"
+    script_txt.write_text(script, encoding="utf-8")
+
+    audio_path = run_dir / "voiceover.mp3"
+    voiceover_py = str(TOOLKIT_TOOLS / "voiceover.py")
+
+    cmd = [
+        sys.executable, voiceover_py,
+        "--provider", "qwen3",
+        "--script", str(script_txt),
+        "--output", str(audio_path),
+        "--cloud", "runpod",
+        "--instruct", NARRATOR_INSTRUCT,
+        "--speaker", "Ryan",
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(result.stderr[-2000:])
+        raise RuntimeError("Qwen3-TTS voiceover failed")
+
+    print(f"  Voiceover: {audio_path} ({audio_path.stat().st_size // 1024}KB)")
+    return audio_path
 
 
-# ── Step 5: Scene images ──────────────────────────────────────────────────────
+# ── Step 5: Scene images via FLUX.2 on RunPod ────────────────────────────────
 
 def generate_scene_image(visual_direction: str, output_path: Path, scene_num: int) -> Path:
-    """Generate one image via Ideogram 4 API."""
-    if not IDEOGRAM_API_KEY:
-        raise RuntimeError("IDEOGRAM_API_KEY not set")
+    """Generate one 9:16 image via FLUX.2 on RunPod."""
+    from flux2 import generate_image
 
     prompt = (
         f"{visual_direction} "
-        "Style: black and white vintage documentary photography, 1950s-1970s, "
-        "cinematic, high contrast, grain, Memphis Tennessee, Elvis Presley era. "
-        "No text, no watermarks, portrait orientation."
+        "Black and white vintage documentary photograph, 1950s-1970s Tennessee, "
+        "cinematic grain, high contrast, Memphis soul era, Elvis Presley story. "
+        "No text, no watermarks, no words, portrait orientation, photojournalism."
     )
 
-    resp = requests.post(
-        "https://api.ideogram.ai/v1/ideogram-v4/generate",
-        headers={
-            "Api-Key": IDEOGRAM_API_KEY,
-            "Content-Type": "application/json",
-        },
-        json={
-            "image_request": {
-                "prompt": prompt,
-                "resolution": "1080x1920",
-                "rendering_speed": "TURBO",
-                "num_images": 1,
-                "style_type": "REALISTIC",
-            }
-        },
-        timeout=120,
+    result = generate_image(
+        prompt=prompt,
+        output_path=str(output_path),
+        width=VIDEO_WIDTH,
+        height=VIDEO_HEIGHT,
+        cloud="runpod",
+        open_result=False,
     )
-    resp.raise_for_status()
-    data = resp.json()
-    image_url = data["data"][0]["url"]
+    if result is None:
+        raise RuntimeError(f"FLUX.2 failed for scene {scene_num}")
 
-    img_resp = requests.get(image_url, timeout=60)
-    img_resp.raise_for_status()
-    output_path.write_bytes(img_resp.content)
     print(f"  Scene {scene_num} image: {output_path.name}")
     return output_path
 
@@ -267,7 +260,7 @@ def assemble_video(scenes: list[dict], image_paths: list[Path],
     with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", encoding="utf-8",
                                      delete=False, dir=OUT_DIR) as f:
         concat_file = Path(f.name)
-        for i, (scene, img) in enumerate(zip(scenes, image_paths)):
+        for scene, img in zip(scenes, image_paths):
             f.write(f"file '{img.resolve()}'\n")
             f.write(f"duration {scene['duration']}\n")
         # FFmpeg concat demuxer requires repeating last file
@@ -340,18 +333,39 @@ def upload_to_youtube(video_path: Path, topic: str, script: str,
     return url
 
 
+# ── RunPod setup ──────────────────────────────────────────────────────────────
+
+def setup_runpod_endpoints():
+    """One-time setup: create FLUX.2 and Qwen3-TTS endpoints on RunPod."""
+    print("\nSetting up RunPod endpoints...")
+
+    flux2_py = str(TOOLKIT_TOOLS / "flux2.py")
+    result = subprocess.run([sys.executable, flux2_py, "--setup"], check=False)
+    if result.returncode != 0:
+        print("FLUX.2 endpoint setup failed — check RUNPOD_API_KEY in .env")
+        return
+
+    qwen3_py = str(TOOLKIT_TOOLS / "qwen3_tts.py")
+    result = subprocess.run([sys.executable, qwen3_py, "--setup"], check=False)
+    if result.returncode != 0:
+        print("Qwen3-TTS endpoint setup failed")
+        return
+
+    print("\nRunPod setup complete. Endpoint IDs saved to .env")
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def check_deps():
     missing = []
     if not OPENROUTER_API_KEY:
         missing.append("OPENROUTER_API_KEY")
-    if not ELEVENLABS_API_KEY:
-        missing.append("ELEVENLABS_API_KEY")
-    if not ELEVENLABS_VOICE_ID:
-        missing.append("ELEVENLABS_VOICE_ID")
-    if not IDEOGRAM_API_KEY:
-        missing.append("IDEOGRAM_API_KEY")
+    if not RUNPOD_API_KEY:
+        missing.append("RUNPOD_API_KEY")
+    if not os.environ.get("RUNPOD_FLUX2_ENDPOINT_ID"):
+        missing.append("RUNPOD_FLUX2_ENDPOINT_ID (run: python elvis_pipeline.py --setup-runpod)")
+    if not os.environ.get("RUNPOD_QWEN3TTS_ENDPOINT_ID"):
+        missing.append("RUNPOD_QWEN3TTS_ENDPOINT_ID (run: python elvis_pipeline.py --setup-runpod)")
     if not YOUTUBE_CLIENT_SECRETS:
         missing.append("YOUTUBE_CLIENT_SECRETS_FILE")
     elif not Path(YOUTUBE_CLIENT_SECRETS).exists():
@@ -370,16 +384,20 @@ def main():
                     help="Generate script only, skip images/video/upload")
     ap.add_argument("--auth-youtube", action="store_true",
                     help="Run one-time YouTube OAuth browser login")
+    ap.add_argument("--setup-runpod", action="store_true",
+                    help="One-time RunPod endpoint setup for FLUX.2 + Qwen3-TTS")
     args = ap.parse_args()
 
-    # One-time YouTube auth
+    if args.setup_runpod:
+        setup_runpod_endpoints()
+        return
+
     if args.auth_youtube:
         uploader = str(TOOLKIT_TOOLS / "youtube_upload.py")
         subprocess.run([sys.executable, uploader, "--auth",
                         "--client-secrets", YOUTUBE_CLIENT_SECRETS], check=True)
         return
 
-    # Dependency check
     missing = check_deps()
     if missing:
         print("Missing required configuration:")
@@ -418,15 +436,15 @@ def main():
     run_dir = OUT_DIR / date_str
     run_dir.mkdir(exist_ok=True)
 
-    # ── 4. Voiceover
-    print("Generating voiceover (ElevenLabs)...")
-    audio_path = generate_voiceover(script, run_dir / "voiceover.mp3")
+    # ── 4. Voiceover (Qwen3-TTS on RunPod)
+    print("Generating voiceover (Qwen3-TTS on RunPod)...")
+    audio_path = generate_voiceover(script, run_dir)
 
-    # ── 5. Scene images
-    print("Generating scene images (Ideogram 4)...")
+    # ── 5. Scene images (FLUX.2 on RunPod)
+    print("Generating scene images (FLUX.2 on RunPod)...")
     image_paths = []
     for i, scene in enumerate(scenes, 1):
-        img_path = run_dir / f"scene_{i:02d}.jpg"
+        img_path = run_dir / f"scene_{i:02d}.png"
         generate_scene_image(scene["visual_direction"], img_path, i)
         image_paths.append(img_path)
 
