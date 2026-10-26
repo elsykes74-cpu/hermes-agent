@@ -34,7 +34,7 @@ script_input.json format:
 Required env vars (copy .env.example to .env and fill in):
   RUNPOD_API_KEY
   RUNPOD_FLUX2_ENDPOINT_ID       (auto-set by --setup-runpod)
-  RUNPOD_QWEN3TTS_ENDPOINT_ID    (auto-set by --setup-runpod)
+  RUNPOD_QWEN3_TTS_ENDPOINT_ID   (auto-set by --setup-runpod)
   YOUTUBE_CLIENT_SECRETS_FILE
 """
 from __future__ import annotations
@@ -232,7 +232,7 @@ def setup_runpod_endpoints():
         return
 
     qwen3_py = str(TOOLKIT_TOOLS / "qwen3_tts.py")
-    result = subprocess.run([sys.executable, qwen3_py, "--setup"], check=False)
+    result = subprocess.run([sys.executable, qwen3_py, "--setup", "--cloud", "runpod"], check=False)
     if result.returncode != 0:
         print("Qwen3-TTS endpoint setup failed")
         return
@@ -248,8 +248,8 @@ def check_deps():
         missing.append("RUNPOD_API_KEY")
     if not os.environ.get("RUNPOD_FLUX2_ENDPOINT_ID"):
         missing.append("RUNPOD_FLUX2_ENDPOINT_ID (run: python elvis_pipeline.py --setup-runpod)")
-    if not os.environ.get("RUNPOD_QWEN3TTS_ENDPOINT_ID"):
-        missing.append("RUNPOD_QWEN3TTS_ENDPOINT_ID (run: python elvis_pipeline.py --setup-runpod)")
+    if not os.environ.get("RUNPOD_QWEN3_TTS_ENDPOINT_ID"):
+        missing.append("RUNPOD_QWEN3_TTS_ENDPOINT_ID (run: python elvis_pipeline.py --setup-runpod)")
     if not YOUTUBE_CLIENT_SECRETS:
         missing.append("YOUTUBE_CLIENT_SECRETS_FILE")
     elif not Path(YOUTUBE_CLIENT_SECRETS).exists():
