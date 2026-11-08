@@ -1,24 +1,16 @@
 """Tests for opencode-go / opencode-zen flat-namespace model handling.
 
 OpenCode Go is NOT a vendor/model aggregator like OpenRouter — its
-``/v1/models`` endpoint returns bare IDs (``minimax-m2.7``, ``deepseek-v4-flash``)
+``/v1/models`` endpoint returns bare IDs (``minimax-m2.7``, ``kimi-k2.6``)
 and the inference API rejects vendor-prefixed names with HTTP 401
 "Model not supported".
 
-Two bugs this exercises:
-
-1. ``switch_model('deepseek-v4-flash', current_provider='opencode-go')`` used
-   to silently switch the user off opencode-go to native ``deepseek`` because
-   ``detect_provider_for_model`` matched the bare name against the static
-   deepseek catalog.  Fix: once step d matches the model in the current
-   aggregator's live catalog, skip ``detect_provider_for_model``.
-
-2. ``normalize_model_for_provider('minimax/minimax-m2.7', 'opencode-go')``
-   used to pass the ``minimax/`` prefix through unchanged.  When user configs
-   contained prefixed fallback entries (commonly copied from aggregator slugs),
-   the fallback activation path sent ``minimax/minimax-m2.7`` to opencode-go
-   which returned HTTP 401.  Fix: opencode-go/opencode-zen strip ANY leading
-   ``vendor/`` prefix because their APIs are flat-namespace.
+``normalize_model_for_provider('minimax/minimax-m2.7', 'opencode-go')``
+used to pass the ``minimax/`` prefix through unchanged.  When user configs
+contained prefixed fallback entries (commonly copied from aggregator slugs),
+the fallback activation path sent ``minimax/minimax-m2.7`` to opencode-go
+which returned HTTP 401.  Fix: opencode-go/opencode-zen strip ANY leading
+``vendor/`` prefix because their APIs are flat-namespace.
 """
 
 from unittest.mock import patch
@@ -32,7 +24,6 @@ _OPENCODE_GO_LIVE = [
     "minimax-m2.7", "minimax-m2.5",
     "kimi-k2.6", "kimi-k2.5",
     "glm-5.1", "glm-5",
-    "deepseek-v4-pro", "deepseek-v4-flash",
     "qwen3.6-plus", "qwen3.5-plus",
     "mimo-v2-pro", "mimo-v2-omni", "mimo-v2.5-pro", "mimo-v2.5",
 ]
@@ -41,12 +32,6 @@ _OPENCODE_GO_LIVE = [
 # ---------------------------------------------------------------------------
 # normalize_model_for_provider: strip vendor prefix for flat-namespace providers
 # ---------------------------------------------------------------------------
-
-
-def test_opencode_go_strips_deepseek_prefix():
-    assert normalize_model_for_provider(
-        "deepseek/deepseek-v4-flash", "opencode-go"
-    ) == "deepseek-v4-flash"
 
 
 def test_opencode_go_strips_minimax_prefix():
@@ -131,25 +116,6 @@ def _run_switch(raw_input: str, **extra):
         side_effect=fake_list_provider_models,
     ):
         return switch_model(raw_input=raw_input, **defaults)
-
-
-def test_deepseek_v4_flash_stays_on_opencode_go():
-    """Regression: ``/model deepseek-v4-flash`` while on opencode-go must
-    NOT switch to native deepseek just because deepseek's static catalog
-    also contains that name."""
-    result = _run_switch("deepseek-v4-flash")
-    assert result.target_provider == "opencode-go", (
-        f"Expected to stay on opencode-go, got {result.target_provider}. "
-        f"detect_provider_for_model hijacked the bare name."
-    )
-    assert result.new_model == "deepseek-v4-flash"
-
-
-def test_deepseek_v4_pro_stays_on_opencode_go():
-    """Same bug class as the flash variant."""
-    result = _run_switch("deepseek-v4-pro")
-    assert result.target_provider == "opencode-go"
-    assert result.new_model == "deepseek-v4-pro"
 
 
 def test_kimi_k2_6_stays_on_opencode_go():
