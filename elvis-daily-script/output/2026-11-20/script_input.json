@@ -1,8 +1,8 @@
 {
   "date": "2026-11-20",
   "topic": "The night Elvis bought Graceland — he was 22 years old",
-  "grade": "A+",
-  "script": "Three years after driving a delivery truck in Memphis, Elvis Presley bought a mansion. It was March 1957. He was twenty-two years old. The price was one hundred two thousand, five hundred dollars. The house stood on a hill south of the city, built in 1939, and named for a woman called Grace. He kept the name. He moved his parents in. Vernon and Gladys Presley had raised their son in a two-room house in Tupelo, Mississippi, a house his father helped build. Now the family lived behind stone walls and white columns. Gladys lived there for little more than a year. Graceland was his home for twenty years. He died there in August 1977. Today he rests in its garden, beside his mother and father. Every year, hundreds of thousands of people walk up that hill. They come to see where a young man brought his family home.",
+  "grade": "HOLD",
+  "script": "Three years after driving a delivery truck in Memphis, Elvis Presley bought a mansion. It was March 1957. He was twenty-two years old. The price was one hundred two thousand, five hundred dollars. The house stood on a hill south of the city, built in 1939, and named for a woman called Grace. He kept the name. He moved his parents in. Vernon and Gladys Presley had raised their son in a two-room house in Tupelo, Mississippi, a house his father helped build. Now the family lived behind stone walls and white columns. Gladys lived there for little more than a year. Graceland was his home for twenty years. He collapsed there in August 1977. Today he rests in its garden, beside his mother and father. Every year, hundreds of thousands of people walk up that hill. They come to see where a young man brought his family home.",
   "scenes": [
     {
       "scene": 1,
@@ -49,7 +49,7 @@
       "start": 42,
       "end": 51,
       "duration": 9,
-      "narration": "Graceland was his home for twenty years. He died there in August 1977. Today he rests in its garden, beside his mother and father.",
+      "narration": "Graceland was his home for twenty years. He collapsed there in August 1977. Today he rests in its garden, beside his mother and father.",
       "visual_direction": "A quiet memorial garden with a curved brick wall and a still fountain, soft morning mist, flowers on stone, black and white."
     },
     {
@@ -59,6 +59,33 @@
       "duration": 9,
       "narration": "Every year, hundreds of thousands of people walk up that hill. They come to see where a young man brought his family home.",
       "visual_direction": "A long driveway climbing toward the mansion at golden hour, a line of distant silhouettes walking uphill, reverent black and white."
+    }
+  ],
+  "review_status": "HOLD: death wording corrected; sources supplied as leads, full claim-by-claim review and corrected script pending. This is the 149-word PR script, not the separate 145-word file.",
+  "sources": [
+    {
+      "claim": "Elvis collapsed at Graceland; death was pronounced at a hospital",
+      "url": "https://www.history.com/articles/elvis-presley-death-cause"
+    },
+    {
+      "claim": "Purchase, price, house history, family move-in",
+      "url": "https://www.graceland.com/elvis-at-graceland"
+    },
+    {
+      "claim": "Crown Electric truck driver",
+      "url": "https://www.graceland.com/elvis-faq"
+    },
+    {
+      "claim": "Birthplace built by Vernon",
+      "url": "https://elvispresleybirthplace.com/visit/"
+    },
+    {
+      "claim": "Family lived in more than one Tupelo house",
+      "url": "https://www.graceland.com/early-childhood"
+    },
+    {
+      "claim": "Visitor count",
+      "url": "https://www.graceland.com/about-graceland"
     }
   ]
 }
