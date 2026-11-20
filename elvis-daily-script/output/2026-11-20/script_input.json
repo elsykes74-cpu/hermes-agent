@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-20",
+  "topic": "The night Elvis bought Graceland — he was 22 years old",
+  "grade": "A+",
+  "script": "Three years after driving a delivery truck in Memphis, Elvis Presley bought a mansion. It was March 1957. He was twenty-two years old. The price was one hundred two thousand, five hundred dollars. The house stood on a hill south of the city, built in 1939, and named for a woman called Grace. He kept the name. He moved his parents in. Vernon and Gladys Presley had raised their son in a two-room house in Tupelo, Mississippi, a house his father helped build. Now the family lived behind stone walls and white columns. Gladys lived there for little more than a year. Graceland was his home for twenty years. He died there in August 1977. Today he rests in its garden, beside his mother and father. Every year, hundreds of thousands of people walk up that hill. They come to see where a young man brought his family home.",
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "end": 8,
+      "duration": 8,
+      "narration": "Three years after driving a delivery truck in Memphis, Elvis Presley bought a mansion.",
+      "visual_direction": "A lone 1950s delivery truck parked on an empty Memphis street at dawn, long shadows on wet pavement, grainy black and white documentary photograph."
+    },
+    {
+      "scene": 2,
+      "start": 8,
+      "end": 17,
+      "duration": 9,
+      "narration": "It was March 1957. He was twenty-two years old. The price was one hundred two thousand, five hundred dollars.",
+      "visual_direction": "A 1957 real-estate contract and fountain pen resting on a wooden desk under a single lamp, deep shadows, black and white archival still."
+    },
+    {
+      "scene": 3,
+      "start": 17,
+      "end": 25,
+      "duration": 8,
+      "narration": "The house stood on a hill south of the city, built in 1939, and named for a woman called Grace. He kept the name.",
+      "visual_direction": "A colonial mansion on a wooded hilltop seen from the road below in late winter, bare oak trees and overcast light, black and white."
+    },
+    {
+      "scene": 4,
+      "start": 25,
+      "end": 34,
+      "duration": 9,
+      "narration": "He moved his parents in. Vernon and Gladys Presley had raised their son in a two-room house in Tupelo, Mississippi, a house his father helped build.",
+      "visual_direction": "A small two-room shotgun house in rural 1930s Tupelo, Mississippi, porch empty, harsh noon sun, faded black and white documentary photograph."
+    },
+    {
+      "scene": 5,
+      "start": 34,
+      "end": 42,
+      "duration": 8,
+      "narration": "Now the family lived behind stone walls and white columns. Gladys lived there for little more than a year.",
+      "visual_direction": "White columns and a fieldstone wall at dusk, porch light glowing against a darkening sky, quiet and still, black and white."
+    },
+    {
+      "scene": 6,
+      "start": 42,
+      "end": 51,
+      "duration": 9,
+      "narration": "Graceland was his home for twenty years. He died there in August 1977. Today he rests in its garden, beside his mother and father.",
+      "visual_direction": "A quiet memorial garden with a curved brick wall and a still fountain, soft morning mist, flowers on stone, black and white."
+    },
+    {
+      "scene": 7,
+      "start": 51,
+      "end": 60,
+      "duration": 9,
+      "narration": "Every year, hundreds of thousands of people walk up that hill. They come to see where a young man brought his family home.",
+      "visual_direction": "A long driveway climbing toward the mansion at golden hour, a line of distant silhouettes walking uphill, reverent black and white."
+    }
+  ]
+}
