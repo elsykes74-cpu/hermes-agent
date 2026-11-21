@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-21",
+  "topic": "Elvis and James Brown — the mutual respect between the two Kings",
+  "grade": "A+",
+  "script": "In August 1977, James Brown picked up the phone with one request: let him inside Graceland. Elvis Presley was dead. Their friendship had begun eleven years earlier, at a Jackie Wilson show in a Hollywood nightclub. George Klein, Elvis's longtime friend, made the introduction. Klein recalled Elvis's words that night: \"Take me to James.\" In the years that followed, Brown came to Graceland, sometimes unannounced, and the two men spent nights singing gospel songs together. Two Kings. One of rock and roll. One of soul. Brown later wrote, \"I wasn't just a fan, I was his brother.\" At the private viewing, Klein remembered, Brown sat motionless in a corner of the living room for a long while. The next spring, he released \"Love Me Tender.\" A song for the King, sung by his brother.",
+  "word_count": 134,
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "end": 8,
+      "duration": 8,
+      "narration": "In August 1977, James Brown picked up the phone with one request: let him inside Graceland. Elvis Presley was dead.",
+      "visual_direction": "A rotary telephone on a hotel nightstand, Memphis, August 1977, hard window light slicing across the receiver, still and heavy."
+    },
+    {
+      "scene": 2,
+      "start": 8,
+      "end": 17,
+      "duration": 9,
+      "narration": "Their friendship had begun eleven years earlier, at a Jackie Wilson show in a Hollywood nightclub.",
+      "visual_direction": "A crowded 1966 Hollywood nightclub seen from the back, stage lights blooming through cigarette smoke, silhouettes at small round tables."
+    },
+    {
+      "scene": 3,
+      "start": 17,
+      "end": 25,
+      "duration": 8,
+      "narration": "George Klein, Elvis's longtime friend, made the introduction. Klein recalled Elvis's words that night: \"Take me to James.\"",
+      "visual_direction": "A narrow path between nightclub tables lit by a single spotlight, empty chairs pulled back, 1960s glamour in deep shadow."
+    },
+    {
+      "scene": 4,
+      "start": 25,
+      "end": 34,
+      "duration": 9,
+      "narration": "In the years that followed, Brown came to Graceland, sometimes unannounced, and the two men spent nights singing gospel songs together.",
+      "visual_direction": "Graceland's white-columned facade at night in the late 1960s, one warm window glowing, long driveway fading into darkness."
+    },
+    {
+      "scene": 5,
+      "start": 34,
+      "end": 42,
+      "duration": 8,
+      "narration": "Two Kings. One of rock and roll. One of soul. Brown later wrote, \"I wasn't just a fan, I was his brother.\"",
+      "visual_direction": "Two vintage microphones on stands side by side on an empty stage, a single overhead light, soft grain, quiet symmetry."
+    },
+    {
+      "scene": 6,
+      "start": 42,
+      "end": 51,
+      "duration": 9,
+      "narration": "At the private viewing, Klein remembered, Brown sat motionless in a corner of the living room for a long while.",
+      "visual_direction": "A corner of a formal 1970s living room in Memphis, an empty armchair beneath drawn curtains, late-afternoon light falling in a pale bar."
+    },
+    {
+      "scene": 7,
+      "start": 51,
+      "end": 60,
+      "duration": 9,
+      "narration": "The next spring, he released \"Love Me Tender.\" A song for the King, sung by his brother.",
+      "visual_direction": "A 45 rpm record turning slowly on a turntable in a dim room, 1978, the needle catching a thin glint of light, dust drifting in the air."
+    }
+  ],
+  "sources": [
+    {
+      "claim": "Elvis Presley died in August 1977 (Aug 16, 1977) at Graceland",
+      "url": "https://www.cbsnews.com/amp/chicago/news/august-16-elvis-dead-graceland-bathroom"
+    },
+    {
+      "claim": "James Brown phoned George Klein asking to come to Graceland during the private viewing; Klein cleared it with Priscilla",
+      "url": "https://www.elvis.com.au/presley/james-brown-and-elvis-presley.shtml"
+    },
+    {
+      "claim": "Brown and Presley were introduced by George Klein in 1966 at a Jackie Wilson performance in a Hollywood nightclub (eleven years before 1977)",
+      "url": "https://americansongwriter.com/james-brown-on-the-rock-icon-who-opened-doors-for-him-while-simultaneously-keeping-him-from-being-number-one"
+    },
+    {
+      "claim": "Klein recalled Elvis saying 'Take me to James' that night (Klein, Elvis: My Best Man)",
+      "url": "https://www.elvis.com.au/presley/james-brown-and-elvis-presley.shtml"
+    },
+    {
+      "claim": "Brown spent time at Graceland, sometimes arriving unannounced, and the two spent nights singing gospel songs (Klein)",
+      "url": "https://www.elvis.com.au/presley/james-brown-and-elvis-presley.shtml"
+    },
+    {
+      "claim": "Brown wrote: 'I wasn't just a fan, I was his brother'",
+      "url": "https://faroutmagazine.co.uk/artist-james-brown-called-musical-brother/"
+    },
+    {
+      "claim": "Brown called Elvis the king of rock and roll and himself the King of Soul (spoken intro to his 'Love Me Tender')",
+      "url": "https://www.elvis.com.au/presley/james-brown-and-elvis-presley.shtml"
+    },
+    {
+      "claim": "Klein: Brown sat motionless in the corner of the living room for a long while at the private viewing",
+      "url": "https://americansongwriter.com/james-brown-on-the-rock-icon-who-opened-doors-for-him-while-simultaneously-keeping-him-from-being-number-one"
+    },
+    {
+      "claim": "'Love Me Tender' was released in May 1978 (spring) by Polydor as the B-side of 'The Spank'",
+      "url": "https://en.wikipedia.org/wiki/The_Spank"
+    }
+  ]
+}
