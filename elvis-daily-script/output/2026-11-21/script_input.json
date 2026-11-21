@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-21",
+  "topic": "Elvis and James Brown — the mutual respect between the two Kings",
+  "grade": "A+",
+  "script": "In August 1977, the Godfather of Soul sat motionless in a corner of Graceland's living room. Elvis Presley was dead at forty-two. Their story began eleven years earlier, at a Jackie Wilson show in a Hollywood nightclub. George Klein, Elvis's friend, had arranged the introduction. Elvis did not wait for James Brown to be brought over. He asked to be taken to James. From that night, they were friends. In the years that followed, Brown came to Graceland, sometimes unannounced. Klein remembered nights the two men spent singing gospel songs together. Then came the news. Brown called Klein and asked to come to the house for the private viewing. He came, and sat in that corner a long while. Months later, he released his own recording of \"Love Me Tender.\" Brown would later say it simply. I wasn't just a fan. I was his brother.",
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "end": 8,
+      "duration": 8,
+      "narration": "In August 1977, the Godfather of Soul sat motionless in a corner of Graceland's living room. Elvis Presley was dead at forty-two.",
+      "visual_direction": "Graceland's living room in August 1977, heavy drapes drawn against the afternoon, a single empty armchair in a dim corner, black and white documentary photograph."
+    },
+    {
+      "scene": 2,
+      "start": 8,
+      "end": 17,
+      "duration": 9,
+      "narration": "Their story began eleven years earlier, at a Jackie Wilson show in a Hollywood nightclub.",
+      "visual_direction": "A crowded 1966 Hollywood nightclub seen from the back of the room, stage lights haloing through cigarette smoke, black and white documentary photograph."
+    },
+    {
+      "scene": 3,
+      "start": 17,
+      "end": 25,
+      "duration": 8,
+      "narration": "George Klein, Elvis's friend, had arranged the introduction. Elvis did not wait for James Brown to be brought over. He asked to be taken to James.",
+      "visual_direction": "Two reserved nightclub tables separated by a dark aisle, candle lamps glowing, chairs pushed back as if someone just stood, black and white documentary photograph."
+    },
+    {
+      "scene": 4,
+      "start": 25,
+      "end": 34,
+      "duration": 9,
+      "narration": "From that night, they were friends. In the years that followed, Brown came to Graceland, sometimes unannounced.",
+      "visual_direction": "The Graceland gates at night in the late 1960s, a lone car's headlights sweeping the driveway, black and white documentary photograph."
+    },
+    {
+      "scene": 5,
+      "start": 34,
+      "end": 42,
+      "duration": 8,
+      "narration": "Klein remembered nights the two men spent singing gospel songs together.",
+      "visual_direction": "A piano in a lamplit Graceland room after midnight, hymnal open on the stand, two empty stools, soft grain, black and white documentary photograph."
+    },
+    {
+      "scene": 6,
+      "start": 42,
+      "end": 51,
+      "duration": 9,
+      "narration": "Then came the news. Brown called Klein and asked to come to the house for the private viewing. He came, and sat in that corner a long while.",
+      "visual_direction": "A rotary telephone on a side table in a quiet 1977 room, late light through the blinds, receiver off the hook, black and white documentary photograph."
+    },
+    {
+      "scene": 7,
+      "start": 51,
+      "end": 60,
+      "duration": 9,
+      "narration": "Months later, he released his own recording of \"Love Me Tender.\" Brown would later say it simply. I wasn't just a fan. I was his brother.",
+      "visual_direction": "A 1978 seven-inch single spinning on a turntable in a dark room, needle down, one shaft of light across the label, black and white documentary photograph."
+    }
+  ],
+  "sources": [
+    {
+      "claim": "Elvis Presley died August 16, 1977, at age 42",
+      "url": "https://www.history.com/speeches/death-of-elvis-presley"
+    },
+    {
+      "claim": "After Elvis's death Brown called George Klein and asked to come to Graceland during the private viewing; he sat motionless in a corner of the living room for a long while (Klein, Elvis: My Best Man)",
+      "url": "https://www.elvis.com.au/presley/james-brown-and-elvis-presley.shtml"
+    },
+    {
+      "claim": "Same private-viewing account corroborated",
+      "url": "https://americansongwriter.com/james-brown-on-the-rock-icon-who-opened-doors-for-him-while-simultaneously-keeping-him-from-being-number-one/"
+    },
+    {
+      "claim": "James Brown attended the August 18, 1977 private funeral at Graceland",
+      "url": "https://www.kates-boylston.com/american-funeral-director/a-funeral-for-a-king/article_208cdee4-2c3b-11ef-af76-cfddaef83803.html"
+    },
+    {
+      "claim": "They met in 1966 at a Jackie Wilson show at a Hollywood nightclub, introduced by George Klein; Elvis asked to be taken to Brown's table ('Take me to James'); 'from that night on they were fast friends'",
+      "url": "https://www.elvis.com.au/presley/james-brown-and-elvis-presley.shtml"
+    },
+    {
+      "claim": "Meeting at Jackie Wilson show arranged by Klein; Elvis offered to go to Brown's table",
+      "url": "https://americansongwriter.com/james-brown-on-the-rock-icon-who-opened-doors-for-him-while-simultaneously-keeping-him-from-being-number-one/"
+    },
+    {
+      "claim": "Brown spent time at Graceland, sometimes unannounced; Klein was present when they spent the night singing gospel songs together",
+      "url": "https://www.elvis.com.au/presley/james-brown-and-elvis-presley.shtml"
+    },
+    {
+      "claim": "Brown recorded 'Love Me Tender', released 1978 (Polydor 14487, May 1978) as B-side of 'The Spank'",
+      "url": "https://en.wikipedia.org/wiki/The_Spank"
+    },
+    {
+      "claim": "Brown's 'Love Me Tender' recorded shortly after Elvis's death as B-side of 'The Spank'",
+      "url": "https://www.elvis.com.au/presley/james-brown-and-elvis-presley.shtml"
+    },
+    {
+      "claim": "Brown: 'I wasn't just a fan, I was his brother.'",
+      "url": "https://faroutmagazine.co.uk/artist-james-brown-called-musical-brother/"
+    },
+    {
+      "claim": "Same quote attributed to Brown's own writing",
+      "url": "https://www.elvis.com.au/presley/james-brown-and-elvis-presley.shtml"
+    }
+  ]
+}
