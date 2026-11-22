@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-22",
+  "topic": "How Elvis responded to his harshest critics — the ones who said he would destroy America",
+  "grade": "A+",
+  "script": "In 1956, a letter to the FBI warned that a twenty-one-year-old singer was \"a definite danger to the security of the United States.\" His name was Elvis Presley. That August, in Jacksonville, Florida, a juvenile court judge had warrants prepared. The charge: impairing the morality of minors. If Elvis moved his hips, he could be arrested. He did not cancel. He walked onstage, stood nearly still, and wagged one little finger. The crowd loved it. At the final show, he dedicated \"Hound Dog\" to the judge. Five months later, on national television, the cameras showed him only from the waist up. He sang a gospel hymn, \"Peace in the Valley.\" When it ended, the host, Ed Sullivan, spoke to the country and called him \"a real decent, fine boy.\" He had been called a danger to the nation. He answered with a song.",
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "end": 8,
+      "duration": 8,
+      "narration": "In 1956, a letter to the FBI warned that a twenty-one-year-old singer was \"a definite danger to the security of the United States.\" His name was Elvis Presley.",
+      "visual_direction": "A lone typewriter on a 1950s government desk under a hard desk lamp, a half-typed letter in the carriage, deep shadows, ominous stillness."
+    },
+    {
+      "scene": 2,
+      "start": 8,
+      "end": 17,
+      "duration": 9,
+      "narration": "That August, in Jacksonville, Florida, a juvenile court judge had warrants prepared. The charge: impairing the morality of minors. If Elvis moved his hips, he could be arrested.",
+      "visual_direction": "An empty 1956 Southern courthouse hallway, slatted afternoon light across stacked legal papers and a judge's gavel, tense and silent."
+    },
+    {
+      "scene": 3,
+      "start": 17,
+      "end": 25,
+      "duration": 8,
+      "narration": "He did not cancel. He walked onstage, stood nearly still, and wagged one little finger. The crowd loved it.",
+      "visual_direction": "Close detail of a single raised little finger against a glare of theater spotlight in an ornate 1956 Florida theater, the crowd a blur of motion beyond."
+    },
+    {
+      "scene": 4,
+      "start": 25,
+      "end": 34,
+      "duration": 9,
+      "narration": "At the final show, he dedicated \"Hound Dog\" to the judge.",
+      "visual_direction": "A vintage theater marquee at night in 1956 Jacksonville, bulbs blazing, rain-slick street reflecting the lights, a mood of quiet defiance."
+    },
+    {
+      "scene": 5,
+      "start": 34,
+      "end": 42,
+      "duration": 8,
+      "narration": "Five months later, on national television, the cameras showed him only from the waist up.",
+      "visual_direction": "A bulky 1957 television studio camera framed from behind, its viewfinder cropping a stage at waist height, hot studio lights, clinical tension."
+    },
+    {
+      "scene": 6,
+      "start": 42,
+      "end": 51,
+      "duration": 9,
+      "narration": "He sang a gospel hymn, \"Peace in the Valley.\"",
+      "visual_direction": "A softly lit 1957 studio stage with a lone microphone stand, gentle haze drifting through the light, reverent and hushed."
+    },
+    {
+      "scene": 7,
+      "start": 51,
+      "end": 60,
+      "duration": 9,
+      "narration": "When it ended, the host, Ed Sullivan, spoke to the country and called him \"a real decent, fine boy.\" He had been called a danger to the nation. He answered with a song.",
+      "visual_direction": "A 1950s living room at night, a family television glowing as the only light source, empty armchair beside it, warm and redemptive."
+    }
+  ],
+  "sources": [
+    {
+      "claim": "A 1956 letter to the FBI called Presley 'a definite danger to the security of the United States.'",
+      "url": "https://text-message.blogs.archives.gov/2021/08/12/dont-be-cruel-elvis-presleys-visit-to-fbi-headquarters/"
+    },
+    {
+      "claim": "Letter dated May 16, 1956 (supporting context for 1956 date).",
+      "url": "https://en.wikipedia.org/wiki/FBI_files_on_Elvis_Presley"
+    },
+    {
+      "claim": "Elvis was born January 8, 1935 (age 21 throughout the 1956 events).",
+      "url": "https://www.graceland.com/biography"
+    },
+    {
+      "claim": "August 10-11, 1956 Jacksonville Florida Theatre shows; Juvenile Court Judge Marion Gooding prepared warrants charging 'impairing the morality of minors'; Elvis stayed nearly still and twitched his little finger, delighting the crowd.",
+      "url": "https://www.mentalfloss.com/article/30282/elvis-presleys-strangest-concert"
+    },
+    {
+      "claim": "Judge Gooding warned Presley not to gyrate his hips; at the final show Elvis dedicated 'Hound Dog' to the judge.",
+      "url": "https://www.yahoo.com/entertainment/vintage-times-union-elvis-dedicates-090017413.html"
+    },
+    {
+      "claim": "January 6, 1957 Ed Sullivan Show: shown only from the waist up; sang 'Peace in the Valley'; Sullivan called him 'a real decent, fine boy.'",
+      "url": "https://www.history.com/this-day-in-history/september-9/elvis-presley-first-appearance-the-ed-sullivan-show"
+    },
+    {
+      "claim": "Sullivan: 'I wanted to say to Elvis Presley and the country that this is a real decent, fine boy'; filmed only from the waist up.",
+      "url": "https://www.edsullivan.com/?p=1479"
+    }
+  ]
+}
