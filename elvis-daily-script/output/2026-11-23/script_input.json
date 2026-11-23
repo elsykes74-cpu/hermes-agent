@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-23",
+  "topic": "The gospel album Elvis insisted on making when no one thought it would sell",
+  "grade": "A+",
+  "script": "Sixty-six years ago today, Elvis Presley released an album with no rock and roll on it at all. He was less than eight months out of the Army when he walked into RCA Studio B in Nashville. It was late October, 1960. Beside him stood the Jordanaires. And he sang the church music he had carried since boyhood in Tupelo. The record was called His Hand in Mine. The whole album was cut in one session that ran about fourteen hours. One song from those sessions, Crying in the Chapel, was held back for more than four years. In 1965 it climbed to number three in America, and number one in Britain. The album itself kept selling, quietly, for decades. Gold in 1969. Platinum in 1992. And the man the world called the King of Rock and Roll won every one of his competitive Grammys singing gospel.",
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "end": 7,
+      "duration": 7,
+      "narration": "Sixty-six years ago today, Elvis Presley released an album with no rock and roll on it at all.",
+      "visual_direction": "A 1960 record-store bin in soft window light, a single gospel LP sleeve standing apart from rows of rock and roll albums, black and white documentary photograph."
+    },
+    {
+      "scene": 2,
+      "start": 7,
+      "end": 17,
+      "duration": 10,
+      "narration": "He was less than eight months out of the Army when he walked into RCA Studio B in Nashville. It was late October, 1960.",
+      "visual_direction": "Exterior of a plain brick Nashville recording studio on a late-October night in 1960, one streetlamp and a parked Cadillac, grainy black and white."
+    },
+    {
+      "scene": 3,
+      "start": 17,
+      "end": 24,
+      "duration": 7,
+      "narration": "Beside him stood the Jordanaires. And he sang the church music he had carried since boyhood in Tupelo.",
+      "visual_direction": "A small wooden Assembly of God church in 1940s Tupelo, Mississippi, empty pews and an upright piano lit by dusty morning sunbeams, black and white."
+    },
+    {
+      "scene": 4,
+      "start": 24,
+      "end": 33,
+      "duration": 9,
+      "narration": "The record was called His Hand in Mine. The whole album was cut in one session that ran about fourteen hours.",
+      "visual_direction": "Inside a 1960 recording studio after midnight, four vintage microphones in a semicircle, sheet music on stands, a wall clock past 3 a.m., moody black and white."
+    },
+    {
+      "scene": 5,
+      "start": 33,
+      "end": 46,
+      "duration": 13,
+      "narration": "One song from those sessions, Crying in the Chapel, was held back for more than four years. In 1965 it climbed to number three in America, and number one in Britain.",
+      "visual_direction": "A 45 rpm single spinning on a 1965 jukebox in a dim diner, chrome glowing, rain on the window behind it, black and white documentary style."
+    },
+    {
+      "scene": 6,
+      "start": 46,
+      "end": 52,
+      "duration": 6,
+      "narration": "The album itself kept selling, quietly, for decades. Gold in 1969. Platinum in 1992.",
+      "visual_direction": "Close detail of framed gold and platinum record awards on a darkened wall, light raking across the discs, quiet black and white photograph."
+    },
+    {
+      "scene": 7,
+      "start": 52,
+      "end": 60,
+      "duration": 8,
+      "narration": "And the man the world called the King of Rock and Roll won every one of his competitive Grammys singing gospel.",
+      "visual_direction": "An empty church aisle at dusk, a lone microphone stand at the altar under a single shaft of light, reverent black and white documentary image."
+    }
+  ],
+  "sources": [
+    {
+      "claim": "His Hand in Mine released November 23, 1960 by RCA Victor (66 years ago today); an all-gospel album",
+      "url": "https://en.wikipedia.org/wiki/His_Hand_in_Mine"
+    },
+    {
+      "claim": "Recorded October 30-31, 1960 at RCA Studio B, Nashville; all selections completed in one ~14-hour session",
+      "url": "https://en.wikipedia.org/wiki/His_Hand_in_Mine"
+    },
+    {
+      "claim": "The Jordanaires provided backing vocals",
+      "url": "https://en.wikipedia.org/wiki/His_Hand_in_Mine"
+    },
+    {
+      "claim": "Elvis discharged from the Army March 5, 1960 (under eight months before the session)",
+      "url": "https://time.com/3638949/return-of-the-king-when-elvis-left-the-army"
+    },
+    {
+      "claim": "Elvis's first songs were gospel at church in Tupelo, and he never stopped singing them (Graceland, quoted)",
+      "url": "https://www.aol.com/articles/followed-elvis-tupelo-graceland-wasnt-110236105.html"
+    },
+    {
+      "claim": "Crying in the Chapel recorded at the October 1960 sessions, withheld, released April 1965",
+      "url": "https://en.wikipedia.org/wiki/Crying_in_the_Chapel"
+    },
+    {
+      "claim": "Crying in the Chapel reached #3 on the Billboard Hot 100",
+      "url": "https://en.wikipedia.org/wiki/Crying_in_the_Chapel"
+    },
+    {
+      "claim": "Crying in the Chapel reached #1 in the UK",
+      "url": "https://officialcharts.com/songs/elvis-presley-crying-in-the-chapel"
+    },
+    {
+      "claim": "His Hand in Mine certified RIAA Gold April 9, 1969 and Platinum March 27, 1992",
+      "url": "https://en.wikipedia.org/wiki/His_Hand_in_Mine"
+    },
+    {
+      "claim": "All three of Elvis's competitive Grammys were for gospel/inspirational recordings (1968, 1973, 1975 ceremonies)",
+      "url": "https://www.grammy.com/artists/elvis-presley/6033"
+    }
+  ]
+}
