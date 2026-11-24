@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-24",
+  "topic": "Elvis's last Christmas at Graceland — December 1976",
+  "grade": "A+",
+  "word_count": 141,
+  "script": "Elvis Presley spent seventeen Christmases at Graceland. December 1976 would be the last. He had bought the Memphis mansion in 1957, and every winter he made it glow. Blue lights lined the long driveway. A nativity scene stood on the front lawn. By his own tradition, the decorations stayed up until his birthday on January eighth. That season, at his side was Ginger Alden, twenty years old, whom he had begun dating only weeks before, in November. On New Year's Eve, he was not home. He was onstage in Pittsburgh, where sixteen thousand people packed the Civic Arena to ring in 1977 with him. Weeks later, back at Graceland, he asked Ginger to marry him. He had just turned forty-two. Less than seven months later, he was gone. Graceland still lights the blue driveway every winter. Elvis never saw another Christmas.",
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "end": 8,
+      "duration": 8,
+      "narration": "Elvis Presley spent seventeen Christmases at Graceland. December 1976 would be the last.",
+      "visual_direction": "Wide shot of a snow-dusted Southern colonial mansion at dusk in 1976 Memphis, columns lit softly, bare oaks framing it, black and white documentary photograph, hushed and still."
+    },
+    {
+      "scene": 2,
+      "start": 8,
+      "end": 17,
+      "duration": 9,
+      "narration": "He had bought the Memphis mansion in 1957, and every winter he made it glow. Blue lights lined the long driveway. A nativity scene stood on the front lawn.",
+      "visual_direction": "A long curving driveway lined with glowing bulbs at night, a lawn nativity scene silhouetted beyond, 1970s Memphis, grainy black and white documentary photograph, soft halo glow."
+    },
+    {
+      "scene": 3,
+      "start": 17,
+      "end": 25,
+      "duration": 8,
+      "narration": "By his own tradition, the decorations stayed up until his birthday on January eighth.",
+      "visual_direction": "Close detail of a wall calendar turned to January beside heavy velvet drapes and ornaments in a dim 1970s living room, black and white documentary photograph, quiet warmth."
+    },
+    {
+      "scene": 4,
+      "start": 25,
+      "end": 34,
+      "duration": 9,
+      "narration": "That season, at his side was Ginger Alden, twenty years old, whom he had begun dating only weeks before, in November.",
+      "visual_direction": "Two figures seen only from behind, walking a lamplit mansion hallway in winter 1976, long shadows on patterned carpet, black and white documentary photograph, intimate and tender."
+    },
+    {
+      "scene": 5,
+      "start": 34,
+      "end": 42,
+      "duration": 8,
+      "narration": "On New Year's Eve, he was not home. He was onstage in Pittsburgh, where sixteen thousand people packed the Civic Arena to ring in 1977 with him.",
+      "visual_direction": "A packed 1970s indoor arena seen from the rafters, a single spotlight cutting through haze toward a distant stage at midnight, black and white documentary photograph, electric anticipation."
+    },
+    {
+      "scene": 6,
+      "start": 42,
+      "end": 51,
+      "duration": 9,
+      "narration": "Weeks later, back at Graceland, he asked Ginger to marry him. He had just turned forty-two. Less than seven months later, he was gone.",
+      "visual_direction": "A small open ring box resting on a marble counter under a single lamp in January 1977, black and white documentary photograph, quiet stillness tinged with foreboding."
+    },
+    {
+      "scene": 7,
+      "start": 51,
+      "end": 60,
+      "duration": 9,
+      "narration": "Graceland still lights the blue driveway every winter. Elvis never saw another Christmas.",
+      "visual_direction": "The empty mansion driveway at night, its line of lights glowing against the dark, mansion windows dark beyond, black and white documentary photograph, elegiac and silent."
+    }
+  ],
+  "sources": [
+    {
+      "claim": "Elvis bought Graceland in 1957; spent every Christmas there except three (two in the Army, one in Las Vegas) until 1976, his last holiday — 20 years minus 3 = 17 Christmases",
+      "url": "https://www.cheatsheet.com/news/elvis-presley-how-many-christmases-did-he-celebrate-graceland.html"
+    },
+    {
+      "claim": "Elvis lined the Graceland driveway with blue lights and decorated the lawn with a Nativity scene; Graceland continues his holiday tradition",
+      "url": "https://www.graceland.com/blog/posts/elvis-presleys-graceland-at-christmas"
+    },
+    {
+      "claim": "Elvis put decorations up early and kept them on display through his Jan. 8 birthday (per Graceland.com)",
+      "url": "https://www.deseret.com/2023/11/29/23981647/christmas-at-graceland-how-to-watch-elvis-music-post-malone-john-legend"
+    },
+    {
+      "claim": "Ginger Alden born November 13, 1956 (age 20 in Dec 1976); met Elvis at Graceland November 19, 1976",
+      "url": "https://en.wikipedia.org/wiki/Ginger_Alden"
+    },
+    {
+      "claim": "First meeting November 19, 1976; Elvis proposed on January 26, 1977 at Graceland",
+      "url": "https://www.elvis.com.au/presley/elvis-presley-interview-with-ginger-alden.shtml"
+    },
+    {
+      "claim": "Dec. 31, 1976 concert at Pittsburgh's Civic Arena; 16,000 fans packed the arena; he died eight months later at age 42",
+      "url": "https://www.pittsburghmagazine.com/tbt-watch-the-kings-final-pittsburgh-concert/"
+    },
+    {
+      "claim": "Elvis Presley died August 16, 1977 (less than seven months after the Jan. 26, 1977 proposal); born January 8, 1935, so he had just turned 42 at the proposal",
+      "url": "https://www.aol.com/elvis-presley-died-aug-16-100108512.html"
+    },
+    {
+      "claim": "Graceland still lines the driveway with blue lights each holiday season, displayed through Elvis's Jan. 8 birthday",
+      "url": "https://www.graceland.com/holiday-lighting-weekend"
+    }
+  ]
+}
