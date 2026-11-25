@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-25",
+  "topic": "The moment Elvis realized his career was in danger — and what he did about it",
+  "grade": "A+",
+  "script": "For more than seven years, Elvis Presley did not give a single live concert. After a benefit show at Pearl Harbor in March 1961, he turned to Hollywood. The films kept coming. By 1968, the box office was fading, and his career needed mending. Then, in June, he walked into NBC's studios in Burbank, California. Director Steve Binder did not want a Christmas special. He wanted something raw, something for a younger audience. So Elvis stepped onto a small stage in black leather, surrounded by trusted musicians and a live crowd. It was his first concert since that night in Hawaii. On December 3, 1968, NBC broadcast the result. It drew forty-two percent of the television audience, the most-watched show of its season. He closed in a white suit, singing a new song, If I Can Dream. Seven years of silence. One night of television. The King was back.",
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "end": 8,
+      "duration": 8,
+      "narration": "For more than seven years, Elvis Presley did not give a single live concert. After a benefit show at Pearl Harbor in March 1961, he turned to Hollywood.",
+      "visual_direction": "A darkened Honolulu arena in 1961 after the crowd has gone, folding chairs scattered under a single hanging work light, black and white documentary photograph, hushed and final."
+    },
+    {
+      "scene": 2,
+      "start": 8,
+      "end": 17,
+      "duration": 9,
+      "narration": "The films kept coming. By 1968, the box office was fading, and his career needed mending.",
+      "visual_direction": "A 1960s Hollywood soundstage with painted beach backdrops and empty director's chairs, flat studio light, black and white documentary photograph, weary and repetitive."
+    },
+    {
+      "scene": 3,
+      "start": 17,
+      "end": 25,
+      "duration": 8,
+      "narration": "Then, in June, he walked into NBC's studios in Burbank, California.",
+      "visual_direction": "The exterior of a television studio in Burbank, California, in summer 1968, harsh sunlight and long shadows across a parking lot, black and white documentary photograph, expectant."
+    },
+    {
+      "scene": 4,
+      "start": 25,
+      "end": 34,
+      "duration": 9,
+      "narration": "Director Steve Binder did not want a Christmas special. He wanted something raw, something for a younger audience.",
+      "visual_direction": "A cluttered 1968 production office with a storyboard pinned to a corkboard and a cold cup of coffee under a desk lamp, black and white documentary photograph, restless creative tension."
+    },
+    {
+      "scene": 5,
+      "start": 34,
+      "end": 42,
+      "duration": 8,
+      "narration": "So Elvis stepped onto a small stage in black leather, surrounded by trusted musicians and a live crowd. It was his first concert since that night in Hawaii.",
+      "visual_direction": "A small square stage ringed by audience seats under hot overhead lights, an electric guitar resting on a stool, a black leather jacket over a chair back, black and white documentary photograph, intimate and electric."
+    },
+    {
+      "scene": 6,
+      "start": 42,
+      "end": 51,
+      "duration": 9,
+      "narration": "On December 3, 1968, NBC broadcast the result. It drew forty-two percent of the television audience, the most-watched show of its season.",
+      "visual_direction": "A 1968 American living room at night lit only by the glow of a console television set, black and white documentary photograph, quiet anticipation."
+    },
+    {
+      "scene": 7,
+      "start": 51,
+      "end": 60,
+      "duration": 9,
+      "narration": "He closed in a white suit, singing a new song, If I Can Dream. Seven years of silence. One night of television. The King was back.",
+      "visual_direction": "A bare studio stage in 1968 with towering illuminated block letters behind an empty microphone stand, black and white documentary photograph, triumphant and reverent."
+    }
+  ],
+  "sources": [
+    {
+      "claim": "Elvis's March 25, 1961 USS Arizona benefit at Bloch Arena, Pearl Harbor, was his last live concert until June 27, 1968 at NBC's Burbank studios",
+      "url": "https://www.staradvertiser.com/?p=270056"
+    },
+    {
+      "claim": "1961 Pearl Harbor benefit concert for the USS Arizona Memorial",
+      "url": "https://news.usni.org/2016/12/07/elvis-helped-save-uss-arizona-memorial"
+    },
+    {
+      "claim": "Through the 1960s he focused on films; by 1968 box-office revenue declined",
+      "url": "https://www.military.com/off-duty/movies/2023/08/08/reinventing-elvis-68-comeback-traces-elvis-return-music-army-and-bad-movies.html"
+    },
+    {
+      "claim": "The 1968 special helped mend Elvis's career",
+      "url": "https://www.thecurrent.org/feature/2018/12/03/fifty-years-ago-nbc-and-singer-helped-elvis-presley-mend-his-career"
+    },
+    {
+      "claim": "Taped June 1968 at NBC Studios, Burbank, California; directed by Steve Binder, who wanted a concert for a younger audience rather than a Christmas special",
+      "url": "https://en.wikipedia.org/wiki/Elvis_(1968_TV_program)"
+    },
+    {
+      "claim": "Black leather outfit worn for most of the special; informal sessions with trusted musicians before a live audience",
+      "url": "https://www.elvis.com.au/presley/elvis-presleys-legendary-1968-comeback-special.shtml"
+    },
+    {
+      "claim": "Aired on NBC December 3, 1968; drew 42% of the TV audience; most-watched show of the season",
+      "url": "https://en.wikipedia.org/wiki/Elvis_(1968_TV_program)"
+    },
+    {
+      "claim": "42 percent share, number-one show of the season (Washington Post, as cited)",
+      "url": "https://www.cheatsheet.com/entertainment/elvis-presley-comeback-special-i-dont-want-to-do-this.html"
+    },
+    {
+      "claim": "Closed in a white suit singing 'If I Can Dream', a song written for the special to replace a planned holiday number",
+      "url": "https://bamfstyle.com/2023/12/03/elvis-68-white-suit/?noamp=mobile"
+    }
+  ]
+}
