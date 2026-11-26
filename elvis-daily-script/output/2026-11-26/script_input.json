@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-26",
+  "topic": "Elvis and Priscilla — the real story behind the marriage and the divorce",
+  "grade": "A+",
+  "script": "On September 13, 1959, a fourteen-year-old girl walked into a rented house in West Germany. The man inside was Elvis Presley. He was twenty-four. A soldier. A star in uniform. Her name was Priscilla Beaulieu. Nearly eight years later, on May 1, 1967, they married in a private suite at the Aladdin Hotel in Las Vegas. The ceremony lasted about eight minutes. Fourteen guests. Nine months to the day, their daughter arrived. Lisa Marie. Born February 1, 1968, in Memphis. But the life that made him famous kept pulling him away. Hotels. Studios. Stages. In 1972, the marriage came apart. And on October 9, 1973, in Santa Monica, it legally ended. They did not part as enemies. They held hands. Some love stories end in silence. This one ended with two people still reaching for each other.",
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "end": 8,
+      "duration": 8,
+      "narration": "On September 13, 1959, a fourteen-year-old girl walked into a rented house in West Germany. The man inside was Elvis Presley.",
+      "visual_direction": "A modest rented German house at night in 1959, warm lamplight spilling from tall windows onto a cobbled street, quiet and expectant."
+    },
+    {
+      "scene": 2,
+      "start": 8,
+      "end": 17,
+      "duration": 9,
+      "narration": "He was twenty-four. A soldier. A star in uniform. Her name was Priscilla Beaulieu.",
+      "visual_direction": "An empty U.S. Army barracks corridor in late-1950s West Germany, polished boots lined beneath a bunk, hard window light."
+    },
+    {
+      "scene": 3,
+      "start": 17,
+      "end": 25,
+      "duration": 8,
+      "narration": "Nearly eight years later, on May 1, 1967, they married in a private suite at the Aladdin Hotel in Las Vegas.",
+      "visual_direction": "A 1967 Las Vegas hotel suite at morning, white flowers on a side table, venetian-blind shadows striping the carpet."
+    },
+    {
+      "scene": 4,
+      "start": 25,
+      "end": 34,
+      "duration": 9,
+      "narration": "The ceremony lasted about eight minutes. Fourteen guests. Nine months to the day, their daughter arrived.",
+      "visual_direction": "Close detail of a wedding cake and a few folded chairs in a small suite, soft diffused light, intimate and hushed."
+    },
+    {
+      "scene": 5,
+      "start": 34,
+      "end": 42,
+      "duration": 8,
+      "narration": "Lisa Marie. Born February 1, 1968, in Memphis. But the life that made him famous kept pulling him away. Hotels. Studios. Stages.",
+      "visual_direction": "A hospital corridor in 1968 Memphis at dawn, then a dark tour-bus window streaked with passing highway lights."
+    },
+    {
+      "scene": 6,
+      "start": 42,
+      "end": 51,
+      "duration": 9,
+      "narration": "In 1972, the marriage came apart. And on October 9, 1973, in Santa Monica, it legally ended.",
+      "visual_direction": "Steps of a California courthouse in 1973, long afternoon shadows, an empty bench and scattered leaves, solemn stillness."
+    },
+    {
+      "scene": 7,
+      "start": 51,
+      "end": 60,
+      "duration": 9,
+      "narration": "They did not part as enemies. They held hands. Some love stories end in silence. This one ended with two people still reaching for each other.",
+      "visual_direction": "Two hands clasped seen from behind on a courthouse stair, grain-heavy black and white, light fading to gentle gray."
+    }
+  ],
+  "sources": [
+    {
+      "claim": "Priscilla, 14, met Elvis, 24, on September 13, 1959, at his rented home in Bad Nauheim, West Germany",
+      "url": "https://en.wikipedia.org/wiki/Priscilla_Presley"
+    },
+    {
+      "claim": "Priscilla was 14 when she met Elvis in Germany during his Army service",
+      "url": "https://www.biography.com/news/elvis-priscilla-presley-relationship-marriage-divorce"
+    },
+    {
+      "claim": "Married May 1, 1967, in an eight-minute ceremony in a private suite at the Aladdin Hotel, Las Vegas, before 14 guests",
+      "url": "https://www.history.com/this-day-in-history/may-1/elvis-presley-marries-priscilla-beaulieu"
+    },
+    {
+      "claim": "Las Vegas wedding reported the following day (contemporary newspaper)",
+      "url": "https://lasvegassun.com/news/1967/may/02/presley-brunette-beauty-surprise-vegas-wedding/"
+    },
+    {
+      "claim": "Lisa Marie born February 1, 1968, in Memphis, nine months after the wedding",
+      "url": "https://en.wikipedia.org/wiki/Lisa_Marie_Presley"
+    },
+    {
+      "claim": "The couple separated in 1972 and the divorce was finalized in 1973",
+      "url": "https://www.biography.com/celebrities/a60308265/did-priscilla-presley-ever-remarry"
+    },
+    {
+      "claim": "Divorce finalized October 9, 1973, in Santa Monica, California",
+      "url": "https://www.thevintagenews.com/2025/10/07/october-9-1973"
+    },
+    {
+      "claim": "The split was amicable; they held hands at the final divorce (per Priscilla's own account and photographer reports)",
+      "url": "https://www.aol.com/articles/elvis-priscilla-presley-were-smiling-122434600.html"
+    },
+    {
+      "claim": "Priscilla recalled holding Elvis's hand in divorce court",
+      "url": "https://www.cheatsheet.com/news/priscilla-presley-realized-a-dark-truth-when-she-held-elvis-presleys-hand-in-divorce-court.html"
+    }
+  ]
+}
