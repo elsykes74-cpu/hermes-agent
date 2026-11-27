@@ -1,0 +1,114 @@
+{
+  "date": "2026-11-27",
+  "topic": "What Colonel Tom Parker never told Elvis — the secret that controlled his entire career",
+  "grade": "A+",
+  "script": "Colonel Tom Parker was not born Tom Parker, and he was never an American citizen. He was born Andreas Cornelis van Kuijk, in Breda, in the Netherlands, in 1909. He entered the United States illegally. He enlisted in the Army under a new name. He never held a U.S. passport. In 1960, his sister back home recognized him in a magazine photograph beside Elvis. Then came the offers. Millions of dollars, from Saudi Arabia, from South America, from promoters across the world, all to bring Elvis to them. Parker turned them down, one after another. Elvis performed outside the United States only in Canada, in 1957. Biographers have long suspected the reason was a manager who could not risk leaving the country. Fans across the world bought his records by the millions. Most of them never saw him on a stage. They only heard the voice, carried home on vinyl.",
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0,
+      "end": 8,
+      "duration": 8,
+      "narration": "Colonel Tom Parker was not born Tom Parker, and he was never an American citizen.",
+      "visual_direction": "An empty 1950s concert-promotion office at night, a single desk lamp throwing hard light across stacked contracts and a cigar in an ashtray, black and white documentary photograph."
+    },
+    {
+      "scene": 2,
+      "start": 8,
+      "end": 17,
+      "duration": 9,
+      "narration": "He was born Andreas Cornelis van Kuijk, in Breda, in the Netherlands, in 1909. He entered the United States illegally.",
+      "visual_direction": "A narrow cobblestone street in Breda in the early 1900s under flat overcast light, then the misty deck rail of a freighter approaching an American harbor, black and white documentary photograph."
+    },
+    {
+      "scene": 3,
+      "start": 17,
+      "end": 25,
+      "duration": 8,
+      "narration": "He enlisted in the Army under a new name. He never held a U.S. passport.",
+      "visual_direction": "A row of 1930s U.S. Army barracks in Hawaii under harsh midday sun, an enlistment ledger open on a wooden table in the foreground, black and white documentary photograph."
+    },
+    {
+      "scene": 4,
+      "start": 25,
+      "end": 34,
+      "duration": 9,
+      "narration": "In 1960, his sister back home recognized him in a magazine photograph beside Elvis.",
+      "visual_direction": "A Dutch kitchen table in 1960 lit by a window, an open American magazine showing a crowded railway platform, the figures too small to make out, black and white documentary photograph."
+    },
+    {
+      "scene": 5,
+      "start": 34,
+      "end": 42,
+      "duration": 8,
+      "narration": "Then came the offers. Millions of dollars, from Saudi Arabia, from South America, from promoters across the world, all to bring Elvis to them.",
+      "visual_direction": "Telegrams and airmail envelopes with foreign postmarks fanned across a 1960s desk, a rotary phone beside them in soft lamplight, black and white documentary photograph."
+    },
+    {
+      "scene": 6,
+      "start": 42,
+      "end": 51,
+      "duration": 9,
+      "narration": "Parker turned them down, one after another. Elvis performed outside the United States only in Canada, in 1957. Biographers have long suspected the reason was a manager who could not risk leaving the country.",
+      "visual_direction": "A packed Canadian hockey arena in 1957 seen from the rafters, spotlights cutting through haze over a distant stage, black and white documentary photograph."
+    },
+    {
+      "scene": 7,
+      "start": 51,
+      "end": 60,
+      "duration": 9,
+      "narration": "Fans across the world bought his records by the millions. Most of them never saw him on a stage. They only heard the voice, carried home on vinyl.",
+      "visual_direction": "A record shop window in a rainy European city at dusk, rows of vinyl sleeves glowing behind wet glass, black and white documentary photograph."
+    }
+  ],
+  "sources": [
+    {
+      "claim": "Parker was born Andreas Cornelis van Kuijk in Breda, Netherlands, on June 26, 1909",
+      "url": "https://en.wikipedia.org/wiki/Colonel_Tom_Parker"
+    },
+    {
+      "claim": "Parker was a native of Breda, born 1909 as Andreas van Kuijk",
+      "url": "https://www.smithsonianmag.com/history/colonel-parker-managed-elvis-career-but-was-he-a-killer-on-the-lam-108042206/"
+    },
+    {
+      "claim": "He entered the United States illegally",
+      "url": "https://www.smithsonianmag.com/history/colonel-parker-managed-elvis-career-but-was-he-a-killer-on-the-lam-108042206/"
+    },
+    {
+      "claim": "He enlisted in the U.S. Army under the assumed name Tom Parker",
+      "url": "https://en.wikipedia.org/wiki/Colonel_Tom_Parker"
+    },
+    {
+      "claim": "He never held a U.S. passport and was never naturalized as an American citizen",
+      "url": "https://www.smithsonianmag.com/history/colonel-parker-managed-elvis-career-but-was-he-a-killer-on-the-lam-108042206/"
+    },
+    {
+      "claim": "In 1960 his sister Nel Dankers-van Kuijk recognized him in a magazine photo with Elvis",
+      "url": "https://www.smithsonianmag.com/history/colonel-parker-managed-elvis-career-but-was-he-a-killer-on-the-lam-108042206/"
+    },
+    {
+      "claim": "Overseas offers included $5M/$10M from Saudi Arabia and up to $2.5M from South American promoters; Parker declined them",
+      "url": "https://en.wikipedia.org/wiki/Colonel_Tom_Parker"
+    },
+    {
+      "claim": "Parker turned down dozens of offers for world tours",
+      "url": "https://www.smithsonianmag.com/history/colonel-parker-managed-elvis-career-but-was-he-a-killer-on-the-lam-108042206/"
+    },
+    {
+      "claim": "Elvis's only concerts outside the U.S. were in Canada in 1957 (Toronto, Ottawa, Vancouver)",
+      "url": "https://scottymoore.net/ottawa.html"
+    },
+    {
+      "claim": "Elvis's only foreign concerts were three in Canada in 1957",
+      "url": "https://www.smithsonianmag.com/history/colonel-parker-managed-elvis-career-but-was-he-a-killer-on-the-lam-108042206/"
+    },
+    {
+      "claim": "Biographers/observers suspect his immigration status explains Elvis never touring abroad (speculation, attributed as such)",
+      "url": "https://faroutmagazine.co.uk/elvis-presley-never-play-outside-north-america/"
+    },
+    {
+      "claim": "Elvis's records sold worldwide in the many millions (Guinness: best-selling solo artist)",
+      "url": "https://guinnessworldrecords.com/world-records/best-selling-solo-artist"
+    }
+  ]
+}
